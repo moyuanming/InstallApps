@@ -324,23 +324,21 @@
             // CheckSinle
             // 
             this.CheckSinle.AutoSize = true;
-            this.CheckSinle.Checked = true;
-            this.CheckSinle.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.CheckSinle.Location = new System.Drawing.Point(279, 81);
+            this.CheckSinle.Location = new System.Drawing.Point(379, 82);
             this.CheckSinle.Name = "CheckSinle";
-            this.CheckSinle.Size = new System.Drawing.Size(60, 16);
+            this.CheckSinle.Size = new System.Drawing.Size(72, 16);
             this.CheckSinle.TabIndex = 12;
-            this.CheckSinle.Text = "Single";
+            this.CheckSinle.Text = "Multiple";
             this.CheckSinle.UseVisualStyleBackColor = true;
             this.CheckSinle.CheckedChanged += new System.EventHandler(this.CheckSinle_CheckedChanged);
             // 
             // TxtIP4
             // 
-            this.TxtIP4.Location = new System.Drawing.Point(347, 79);
+            this.TxtIP4.Location = new System.Drawing.Point(261, 79);
             this.TxtIP4.Name = "TxtIP4";
             this.TxtIP4.Size = new System.Drawing.Size(101, 21);
             this.TxtIP4.TabIndex = 1;
-            this.TxtIP4.Text = "2";
+            this.TxtIP4.Text = "51";
             // 
             // PbExec
             // 

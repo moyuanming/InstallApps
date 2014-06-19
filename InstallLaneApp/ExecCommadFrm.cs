@@ -94,7 +94,7 @@ namespace InstallLaneApp
         string Msg = "";
         void SShTools_RetMessageEvent(string Message)
         {
-            Msg += Message;
+            Msg += Message +"\r\n";
         }
         int BrPress = 0;
         void RetPress(int Press )
@@ -134,7 +134,7 @@ namespace InstallLaneApp
             }
             if (!ret)
             {
-                PbExec.Value = 100;
+                BrPress = 100;
                 LabMessage.Text = "Command Run Failure!";
                 LabMessage.ForeColor = System.Drawing.Color.Red;
                 BtnRetry.Enabled = true;

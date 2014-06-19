@@ -87,7 +87,7 @@ namespace InstallLaneApp
         string RetMsg = "";
         void SSh_RetMessageEvent(string Message)
         {
-            RetMsg += Message;
+            RetMsg += Message +"\r\n";
         }
         void ExecCmd(string CmdString)
         {
@@ -132,7 +132,7 @@ namespace InstallLaneApp
         private void BtnExec_Click(object sender, EventArgs e)
         {
             SetCommand(CbxCommandList.Text);
-            if (CheckSinle.Checked)
+            if (!CheckSinle.Checked)
             {
                 LabMessage.Text = "Please Wait ……!";
                 LabMessage.ForeColor = System.Drawing.Color.Cyan;
@@ -147,7 +147,7 @@ namespace InstallLaneApp
         }
         private void BtnRun_Click(object sender, EventArgs e)
         {
-            if (CheckSinle.Checked)
+            if (!CheckSinle.Checked)
             {
                 ExecCmd(CbxRunCmd.Text);
             }
@@ -182,11 +182,11 @@ namespace InstallLaneApp
 
         private void CheckSinle_CheckedChanged(object sender, EventArgs e)
         {
-            TxtEcount.Enabled = !CheckSinle.Checked;
-            TxtXcount.Enabled = !CheckSinle.Checked;
-            TxtEStartIP.Enabled = !CheckSinle.Checked;
-            TxtXStartIP.Enabled = !CheckSinle.Checked;
-            TxtIP4.Enabled = CheckSinle.Checked;
+            TxtEcount.Enabled = CheckSinle.Checked;
+            TxtXcount.Enabled = CheckSinle.Checked;
+            TxtEStartIP.Enabled = CheckSinle.Checked;
+            TxtXStartIP.Enabled = CheckSinle.Checked;
+            TxtIP4.Enabled = !CheckSinle.Checked;
         }
 
         private void TmResfh_Tick(object sender, EventArgs e)

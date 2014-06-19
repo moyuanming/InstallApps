@@ -12,11 +12,10 @@ echo "Local IP:"$IP
 echo "Last IP:"$Lane
 echo "Exec Svn Co"
 
-svn co --username mym --password future  --non-interactive svn://10.3.54.11/LaneSoft/EMRCV5   /EMRCV5   >>log
-svn co --username mym --password future  --non-interactive svn://10.3.54.11/LaneSoft/$Plaza/$Lane/CONFIG   /EMRCV5/CONFIG  >log 
+svn co --username mym --password future  --non-interactive svn://10.3.54.11/LaneSoft/EMRCV5   /EMRCV5   
+svn co --username mym --password future  --non-interactive svn://10.3.54.11/LaneSoft/$Plaza/$Lane/CONFIG   /EMRCV5/CONFIG  
 
-cat log
-rm log 
+
 cd /EMRCV5
 svn --username mym --password future up  --accept tf  
 echo "Set Execute permissions "

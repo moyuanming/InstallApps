@@ -12,10 +12,6 @@ namespace InstallLaneApp
         public delegate void RetMessage (string  Message);
         public delegate void RetPress(int Message);
         public delegate void RetState(bool ret);
-
-
-
-
         public event RetMessage RetMessageEvent;
         public event RetPress RetPressEvent;
         public event RetState  RetStateEnevt;
@@ -26,161 +22,89 @@ namespace InstallLaneApp
 
             //  Any string automatically begins a fully-functional 30-day trial.
             bool success;
-            success = ssh.UnlockComponent("30-day trial");
+            success = ssh.UnlockComponent("Anything for 30-day trial");
             if (success != true)
             {
-                RetMessageEvent(ssh.LastErrorText + "\r\n");
+                MessageBox.Show(ssh.LastErrorText);
                 RetStateEnevt(false);
                 return;
             }
             RetPressEvent(10);
-            //  This is the prompt we'll be expecting to find in
-            //  the output of the remote shell.
-            string myPrompt;
-            myPrompt = "#";
-            string cmdOutput;
-            //  Connect to an SSH server:
-            int port;
-            //  Hostname may be an IP address or hostname:     
-            port = 22;
+            //  Connect to an SSH server:      
+            int port = 22;
             success = ssh.Connect(hostname, port);
-
             if (success != true)
             {
-                RetMessageEvent(ssh.LastErrorText + "\r\n");
-              
+                MessageBox.Show(ssh.LastErrorText);
                 RetStateEnevt(false);
                 return;
             }
-            //  Wait a max of 10 seconds when reading responses..
-            ssh.IdleTimeoutMs = 10000;
+            RetMessageEvent("Connect to " + hostname + "\r\n");
+            //  Wait a max of 5 seconds when reading responses..
+            ssh.IdleTimeoutMs = 0;
             //  Authenticate using login/password:
             success = ssh.AuthenticatePw(UserName, Pwd);
             if (success != true)
             {
-                RetMessageEvent(ssh.LastErrorText + "\r\n");
-              
-                RetStateEnevt(false);
-                return;
-            }
-            RetPressEvent(20);
-            //  Open a session channel.  (It is possible to have multiple
-            //  session channels open simultaneously.)
-            int channelNum;
-            channelNum = ssh.OpenSessionChannel();
-            if (channelNum < 0)
-            {
-                RetMessageEvent(ssh.LastErrorText + "\r\n");
-                RetStateEnevt(false);
-                return;
-            }         
-            string termType;
-            termType = "dumb";
-            int widthInChars;
-            widthInChars = 120;
-            int heightInChars;
-            heightInChars = 40;
-            //  Use 0 for pixWidth and pixHeight when the dimensions
-            //  are set in number-of-chars.
-            int pixWidth;
-            pixWidth = 0;
-            int pixHeight;
-            pixHeight = 0;
-            success = ssh.SendReqPty(channelNum, termType, widthInChars, heightInChars, pixWidth, pixHeight);
-            if (success != true)
-            {
-                RetMessageEvent(ssh.LastErrorText + "\r\n");
+                MessageBox.Show(ssh.LastErrorText);
                 RetStateEnevt(false);
                 return;
             }
             RetPressEvent(30);
-            //  Start a shell on the channel:
-            success = ssh.SendReqShell(channelNum);
+            //  Open a session channel.  (It is possible to have multiple
+            //  session channels open simultaneously.)
+            int channelNum; 
+            RetMessageEvent("Open Session Channel " + "\r\n");
+            channelNum = ssh.OpenSessionChannel();
+            if (channelNum < 0)
+            {
+                MessageBox.Show(ssh.LastErrorText);
+                RetStateEnevt(false);
+                return;
+            }
+            RetPressEvent(50);
+            //  Request a directory listing on the remote server:
+            //  If your server is Windows, change the string from "ls" to "dir"
+            RetMessageEvent("SendReqExec: " + Command + "\r\n");
+            success = ssh.SendReqExec(channelNum, Command);
             if (success != true)
             {
-                RetMessageEvent(ssh.LastErrorText + "\r\n");
-                RetPressEvent(100);
-                return;
-            }
-            //   Run the 1st command in the remote shell, which will be to
-            //   "cd" to a subdirectory.
-            success = ssh.ChannelSendString(channelNum, string.Format("{0} \r\n",Command), "ansi");
-            if (success != true)
-            {
-                RetMessageEvent(ssh.LastErrorText + "\r\n");
+                MessageBox.Show(ssh.LastErrorText);
                 RetStateEnevt(false);
                 return;
             }
-            //  Retrieve the output.
-            success = ssh.ChannelReceiveUntilMatch(channelNum, myPrompt, "ansi", true);
-            if (success != true)
-            {
-                RetMessageEvent(ssh.LastErrorText + "\r\n");
-                RetStateEnevt(false);
-                return;
-            }
-            RetPressEvent(40);
-            cmdOutput = ssh.GetReceivedText(channelNum, "ansi");
-            if (cmdOutput == null)
-            {
-                RetMessageEvent(ssh.LastErrorText + "\r\n");
-                RetStateEnevt(false);
-                return;
-            }
-            RetMessageEvent( cmdOutput.Replace("[0m", "") +"\r\n");   
-           
-            //  Send an EOF.  This tells the server that no more data will
-            //  be sent on this channel.  The channel remains open, and
-            //  the SSH client may still receive output on this channel.
-            success = ssh.ChannelSendEof(channelNum);
-            if (success != true)
-            {
-                RetMessageEvent(ssh.LastErrorText + "\r\n");
-                RetStateEnevt(false);
-                return;
-            }
- 
-            int n;
-            int pollTimeoutMs;
-            pollTimeoutMs = 2000;
-            n = ssh.ChannelReadAndPoll(channelNum, pollTimeoutMs);
-            if (n < 0)
-            {
-                RetMessageEvent(ssh.LastErrorText + "\r\n");
-                RetStateEnevt(false);
-                return;
-            }
-            RetPressEvent(80);
-            //  Close the channel:
-            success = ssh.ChannelSendClose(channelNum);
-            if (success != true)
-            {
-                RetMessageEvent(ssh.LastErrorText + "\r\n");
-                RetStateEnevt(false);
-                return;
-            }
-            //  Perhaps we did not receive all of the commands output.
-            //  To make sure,  call ChannelReceiveToClose to accumulate any remaining
+            RetPressEvent(60);
+            //  Call ChannelReceiveToClose to read
             //  output until the server's corresponding "channel close" is received.
             success = ssh.ChannelReceiveToClose(channelNum);
             if (success != true)
             {
-                RetMessageEvent(ssh.LastErrorText + "\r\n");
+                MessageBox.Show(ssh.LastErrorText);
                 RetStateEnevt(false);
                 return;
             }
-
-            cmdOutput = ssh.GetReceivedText(channelNum, "ansi").Replace("[0m", "");
+            RetPressEvent(70);
+            //  Let's pickup the accumulated output of the command:
+            string cmdOutput;
+            RetMessageEvent("Get Received Text:" + "\r\n");
+            cmdOutput = ssh.GetReceivedText(channelNum, "ansi");
             if (cmdOutput == null)
             {
-                RetMessageEvent(ssh.LastErrorText + "\r\n");
+                RetMessageEvent("Exec Command Not Ret Message !");
                 RetStateEnevt(false);
                 return;
             }
-            RetMessageEvent(cmdOutput + "\r\n");
-            RetPressEvent(100);
+            else
+            {
+                RetMessageEvent( cmdOutput + "\r\n");
+            }
+            RetPressEvent(80);
+            //  Display the remote shell's command output:
             //  Disconnect
+            RetMessageEvent("Command Exec Success Disconnect" + "\r\n");
             ssh.Disconnect();
+            RetMessageEvent("End Disconnect " + "\r\n");
+            RetPressEvent(100);
         }
 
     }

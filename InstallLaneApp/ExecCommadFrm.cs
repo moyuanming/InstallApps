@@ -36,10 +36,32 @@ namespace InstallLaneApp
         {
             get { return _MyCommand; }
             set { _MyCommand = value;
-            txtCommaneName.Text = _MyCommand.Name;
+            
             }
         }
-
+        string _CommandString;
+        public string CommandString
+        {
+            get { return _CommandString; }
+            set { _CommandString = value; }
+        }
+        int _ExecType = 0;
+        public int ExecType
+        {
+            get { return _ExecType; }
+            set { 
+                
+                _ExecType = value;
+                if (0 == _ExecType)
+                {
+                    txtCommaneName.Text = _MyCommand.Name;
+                }
+                else
+                {
+                    txtCommaneName.Text = _CommandString;
+                }
+            }
+        }
         void RunCommand()
         {
 
@@ -47,14 +69,21 @@ namespace InstallLaneApp
             SShTools.RetMessageEvent += SShTools_RetMessageEvent;
             SShTools.RetPressEvent += RetPress;
             SShTools.RetStateEnevt += SShTools_RetStateEnevt;
-            if (null != MyCommand)
+            if (0 == ExecType)
             {
-                foreach (UploadFile tmp in MyCommand.UploadFileList)
+                if (null != MyCommand)
                 {
-                    SFtptools.SftpUpload(IP,UserName,Pwd,string.Format(@"Command\{0}", tmp.FilePath), string.Format(@"/mnt/{0}", tmp.FilePath));
+                    foreach (UploadFile tmp in MyCommand.UploadFileList)
+                    {
+                        SFtptools.SftpUpload(IP, UserName, Pwd, string.Format(@"Command\{0}", tmp.FilePath), string.Format(@"/mnt/{0}", tmp.FilePath));
+                    }
+                    SShTools.SSHRSMC(IP, UserName, Pwd, string.Format(@"chmod +x /mnt/ -R ", MyCommand.ExecFileName));
+                    SShTools.SSHRSMC(IP, UserName, Pwd, string.Format(@"/mnt/{0}", MyCommand.ExecFileName));
                 }
-                SShTools.SSHRSMC(IP, UserName, Pwd, string.Format(@"chmod +x /mnt/ -R ", MyCommand.ExecFileName));
-                SShTools.SSHRSMC(IP, UserName, Pwd, string.Format(@"/mnt/{0}", MyCommand.ExecFileName));
+            }
+            else
+            {
+                SShTools.SSHRSMC(IP, UserName, Pwd, CommandString);
             }
         }
         bool ret = true;

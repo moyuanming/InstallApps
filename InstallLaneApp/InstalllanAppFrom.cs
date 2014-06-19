@@ -19,187 +19,23 @@ using Routrek.Toolkit;
 using Routrek.PKI;
 namespace InstallLaneApp
 {
-    public partial class InstalllanAppFrom : Form,ISSHConnectionEventReceiver, ISSHChannelEventReceiver
+    public partial class InstalllanAppFrom : Form
     {
         public InstalllanAppFrom()
         {
             InitializeComponent();
         }
-        private static SSHConnection _conn;
-        string ret = "";
-        public void OnData(byte[] data, int offset, int length)
-        {
-            ret = Encoding.ASCII.GetString(data, offset, length);
-        }
-        public void OnDebugMessage(bool always_display, byte[] data)
-        {
-            Debug.WriteLine("DEBUG: " + Encoding.ASCII.GetString(data));
-        }
-        public void OnIgnoreMessage(byte[] data)
-        {
-            Debug.WriteLine("Ignore: " + Encoding.ASCII.GetString(data));
-        }
-        public void OnAuthenticationPrompt(string[] msg)
-        {
-            Debug.WriteLine("Auth Prompt " + msg[0]);
-        }
 
-        public void OnError(Exception error, string msg)
-        {
-            Debug.WriteLine("ERROR: " + msg);
-        }
-        public void OnChannelClosed()
-        {
-            Debug.WriteLine("Channel closed");
-            _conn.Disconnect("");
-            //_conn.AsyncReceive(this);
-        }
-        public void OnChannelEOF()
-        {
-            _pf.Close();
-            Debug.WriteLine("Channel EOF");
-        }
-        public void OnExtendedData(int type, byte[] data)
-        {
-            Debug.WriteLine("EXTENDED DATA");
-        }
-        public void OnConnectionClosed()
-        {
-            Debug.WriteLine("Connection closed");
-        }
-        public void OnUnknownMessage(byte type, byte[] data)
-        {
-            Debug.WriteLine("Unknown Message " + type);
-        }
-        public void OnChannelReady()
-        {
-            
-        }
-        public void OnChannelError(Exception error, string msg)
-        {
-            Debug.WriteLine("Channel ERROR: " + msg);
-        }
-        public void OnMiscPacket(byte type, byte[] data, int offset, int length)
-        {
-        }
-        public SSHChannel _pf;
-        public PortForwardingCheckResult CheckPortForwardingRequest(string host, int port, string originator_host, int originator_port)
-        {
-            PortForwardingCheckResult r = new PortForwardingCheckResult();
-            r.allowed = true;
-            r.channel = this;
-            return r;
-        }
-        public void EstablishPortforwarding(ISSHChannelEventReceiver rec, SSHChannel channel)
-        {
-            _pf = channel;
-        }
-
-        string UploadFile(string localFilePath,string remoteFilePath)
-        {
-           string IP = string.Format("{0}{1}", TxtIP.Text, TxtIP4.Text);
-           return SFtptools.SftpUpload(IP, TxtUserName.Text, TxtPwd.Text, localFilePath, remoteFilePath);
-        }
-        void ExecCmd(string CmdString)
-        {
-            SSh2Tools SSh = new SSh2Tools();
-            SSh.RetMessageEvent += SSh_RetMessageEvent;
-            SSh.RetPressEvent += SSh_RetPressEvent;
-            SSh.RetStateEnevt += SSh_RetStateEnevt;
-            string IP = string.Format("{0}{1}", TxtIP.Text,TxtIP4.Text);
-            SSh.SSHRSMC(IP, TxtUserName.Text, TxtPwd.Text, CmdString);
-         
-        }
-        bool RetState = true;
-        void SSh_RetStateEnevt(bool ret)
-        {
-            RetState = ret;
-        }
-        int RetValue = 0;
-        void SSh_RetPressEvent(int Input)
-        {
-            RetValue = Input;
-        }
-        string RetMsg = "";
-        void SSh_RetMessageEvent(string Message)
-        {
-            RetMsg += Message;
-        }
-        void ExecMultipleMachine(string IPHead,int StartIP,int Count)
-        {
-            for (int i = 0; i < Count; i++)
-            {
-                string IP = string.Format("{0}{1}", IPHead, StartIP + i);
-
-                ExecCommadFrm Frm = new ExecCommadFrm();
-                Frm.IP = IP;
-                Frm.UserName = TxtUserName.Text;
-                Frm.Pwd = TxtPwd.Text;
-                Frm.MyCommand = SelectCommd;
-                Frm.Show();
-            }
-        }
-        void RunCommand()
-        {
-                if (null != SelectCommd)
-                {
-
-                  
-                    
-                    foreach (UploadFile tmp in SelectCommd.UploadFileList)
-                    {
-                        UploadFile(string.Format(@"Command\{0}", tmp.FilePath), string.Format(@"/mnt/{0}", tmp.FilePath));
-                    }
-                    ExecCmd(string.Format(@"chmod +x /mnt/ -R ", SelectCommd.ExecFileName));
-                    ExecCmd(string.Format(@"/mnt/{0}", SelectCommd.ExecFileName));
-                }
-        }
-        private void BtnExec_Click(object sender, EventArgs e)
-        {
-            SetCommand(CbxCommandList.Text);
-            if (CheckSinle.Checked)
-            {
-                LabMessage.Text = "Please Wait ……!";
-                LabMessage.ForeColor = System.Drawing.Color.Cyan;
-                Thread Th = new Thread(RunCommand);
-                Th.Start();
-            }
-            else
-            {
-
-                ExecMultipleMachine(TxtIP.Text, Convert.ToInt32(TxtEStartIP.Text), Convert.ToInt32(TxtEcount.Text));
-                ExecMultipleMachine(TxtIP.Text, Convert.ToInt32(TxtXStartIP.Text), Convert.ToInt32(TxtXcount.Text));              
-            }
-            
-            return;
-
-
-
-
-        }
-
-     
-
-        private void BtnConfig_Click(object sender, EventArgs e)
-        {
-            LanCommandConfigFrm frm = new LanCommandConfigFrm();
-            frm.ShowDialog();
-
-
-            LoadCommandFile();
-           
-        }
         LanToolsConfig Lts;
         LaneCommand SelectCommd;
         void SetCommand(string CommandName)
         {
-           
             foreach (LaneCommand tmp in Lts.CommandList)
             {
                 if (CommandName == tmp.Name)
                 {
                     SelectCommd = tmp;
-                    return ;
+                    return;
                 }
             }
             SelectCommd = null;
@@ -233,16 +69,108 @@ namespace InstallLaneApp
         {
             LoadCommandFile();
         }
+        string UploadFile(string localFilePath,string remoteFilePath)
+        {
+           string IP = string.Format("{0}{1}", TxtIP.Text, TxtIP4.Text);
+           return SFtptools.SftpUpload(IP, TxtUserName.Text, TxtPwd.Text, localFilePath, remoteFilePath);
+        }
+        bool RetState = true;
+        void SSh_RetStateEnevt(bool ret)
+        {
+            RetState = ret;
+        }
+        int RetValue = 0;
+        void SSh_RetPressEvent(int Input)
+        {
+            RetValue = Input;
+        }
+        string RetMsg = "";
+        void SSh_RetMessageEvent(string Message)
+        {
+            RetMsg += Message;
+        }
+        void ExecCmd(string CmdString)
+        {
+            SSh2Tools SSh = new SSh2Tools();
+            SSh.RetMessageEvent += SSh_RetMessageEvent;
+            SSh.RetPressEvent += SSh_RetPressEvent;
+            SSh.RetStateEnevt += SSh_RetStateEnevt;
+            string IP = string.Format("{0}{1}", TxtIP.Text,TxtIP4.Text);
+            SSh.SSHRSMC(IP, TxtUserName.Text, TxtPwd.Text, CmdString);
+         
+        }
+        
+        void ExecMultipleMachine(string IPHead,int StartIP,int Count,int Type,string Commandstring)
+        {
+            for (int i = 0; i < Count; i++)
+            {
+                string IP = string.Format("{0}{1}", IPHead, StartIP + i);
+
+                ExecCommadFrm Frm = new ExecCommadFrm();
+                Frm.IP = IP;
+                Frm.UserName = TxtUserName.Text;
+                Frm.Pwd = TxtPwd.Text;
+                Frm.MyCommand = SelectCommd;
+                Frm.CommandString = Commandstring;
+                Frm.ExecType = Type;
+                Frm.Show();
+            }
+        }
+        void RunCommand()
+        {
+                if (null != SelectCommd)
+                {                
+                    
+                    foreach (UploadFile tmp in SelectCommd.UploadFileList)
+                    {
+                        UploadFile(string.Format(@"Command\{0}", tmp.FilePath), string.Format(@"/mnt/{0}", tmp.FilePath));
+                    }
+                    ExecCmd(string.Format(@"chmod +x /mnt/ -R ", SelectCommd.ExecFileName));
+                    ExecCmd(string.Format(@"/mnt/{0}", SelectCommd.ExecFileName));
+                }
+        }
+        private void BtnExec_Click(object sender, EventArgs e)
+        {
+            SetCommand(CbxCommandList.Text);
+            if (CheckSinle.Checked)
+            {
+                LabMessage.Text = "Please Wait ……!";
+                LabMessage.ForeColor = System.Drawing.Color.Cyan;
+                Thread Th = new Thread(RunCommand);
+                Th.Start();
+            }
+            else
+            {
+                ExecMultipleMachine(TxtIP.Text, Convert.ToInt32(TxtEStartIP.Text), Convert.ToInt32(TxtEcount.Text),0,"");
+                ExecMultipleMachine(TxtIP.Text, Convert.ToInt32(TxtXStartIP.Text), Convert.ToInt32(TxtXcount.Text),0,"");              
+            }   
+        }
+        private void BtnRun_Click(object sender, EventArgs e)
+        {
+            if (CheckSinle.Checked)
+            {
+                ExecCmd(CbxRunCmd.Text);
+            }
+            else
+            {
+                ExecMultipleMachine(TxtIP.Text, Convert.ToInt32(TxtEStartIP.Text), Convert.ToInt32(TxtEcount.Text), 1, CbxRunCmd.Text);
+                ExecMultipleMachine(TxtIP.Text, Convert.ToInt32(TxtXStartIP.Text), Convert.ToInt32(TxtXcount.Text), 1, CbxRunCmd.Text);  
+            }
+        }
+        private void BtnConfig_Click(object sender, EventArgs e)
+        {
+            LanCommandConfigFrm frm = new LanCommandConfigFrm();
+            frm.ShowDialog();
+            LoadCommandFile();           
+        }
+    
 
         private void BtnClose_Click(object sender, EventArgs e)
         {
             Close();
         }
 
-        private void BtnRun_Click(object sender, EventArgs e)
-        {
-            ExecCmd(CbxRunCmd.Text);
-        }
+    
 
         private void BtnClearMsg_Click(object sender, EventArgs e)
         {

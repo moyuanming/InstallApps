@@ -9,8 +9,18 @@ namespace InstallLaneApp
 {
     class SSh2Tools
     {
+        public delegate void RetMessage (string  Message);
+        public delegate void RetPress(int Message);
+        public delegate void RetState(bool ret);
 
-        public static void SSHRSMC(string hostname,string UserName,string  Pwd,string Command ,TextBox SSHMessage)
+
+
+
+        public event RetMessage RetMessageEvent;
+        public event RetPress RetPressEvent;
+        public event RetState  RetStateEnevt;
+
+        public  void SSHRSMC(string hostname,string UserName,string  Pwd,string Command)
         {
             Chilkat.Ssh ssh = new Chilkat.Ssh();
 
@@ -19,10 +29,11 @@ namespace InstallLaneApp
             success = ssh.UnlockComponent("30-day trial");
             if (success != true)
             {
-                SSHMessage.Text += ssh.LastErrorText + "\r\n";
+                RetMessageEvent(ssh.LastErrorText + "\r\n");
+                RetStateEnevt(false);
                 return;
             }
-
+            RetPressEvent(10);
             //  This is the prompt we'll be expecting to find in
             //  the output of the remote shell.
             string myPrompt;
@@ -33,9 +44,12 @@ namespace InstallLaneApp
             //  Hostname may be an IP address or hostname:     
             port = 22;
             success = ssh.Connect(hostname, port);
+
             if (success != true)
             {
-                SSHMessage.Text += ssh.LastErrorText + "\r\n";
+                RetMessageEvent(ssh.LastErrorText + "\r\n");
+              
+                RetStateEnevt(false);
                 return;
             }
             //  Wait a max of 10 seconds when reading responses..
@@ -44,16 +58,20 @@ namespace InstallLaneApp
             success = ssh.AuthenticatePw(UserName, Pwd);
             if (success != true)
             {
-                SSHMessage.Text += ssh.LastErrorText + "\r\n";
+                RetMessageEvent(ssh.LastErrorText + "\r\n");
+              
+                RetStateEnevt(false);
                 return;
             }
+            RetPressEvent(20);
             //  Open a session channel.  (It is possible to have multiple
             //  session channels open simultaneously.)
             int channelNum;
             channelNum = ssh.OpenSessionChannel();
             if (channelNum < 0)
             {
-                SSHMessage.Text += ssh.LastErrorText + "\r\n";
+                RetMessageEvent(ssh.LastErrorText + "\r\n");
+                RetStateEnevt(false);
                 return;
             }         
             string termType;
@@ -71,15 +89,17 @@ namespace InstallLaneApp
             success = ssh.SendReqPty(channelNum, termType, widthInChars, heightInChars, pixWidth, pixHeight);
             if (success != true)
             {
-                SSHMessage.Text += ssh.LastErrorText + "\r\n";
+                RetMessageEvent(ssh.LastErrorText + "\r\n");
+                RetStateEnevt(false);
                 return;
             }
-
+            RetPressEvent(30);
             //  Start a shell on the channel:
             success = ssh.SendReqShell(channelNum);
             if (success != true)
             {
-                SSHMessage.Text += ssh.LastErrorText + "\r\n";
+                RetMessageEvent(ssh.LastErrorText + "\r\n");
+                RetPressEvent(100);
                 return;
             }
             //   Run the 1st command in the remote shell, which will be to
@@ -87,32 +107,27 @@ namespace InstallLaneApp
             success = ssh.ChannelSendString(channelNum, string.Format("{0} \r\n",Command), "ansi");
             if (success != true)
             {
-                SSHMessage.Text += ssh.LastErrorText + "\r\n";
+                RetMessageEvent(ssh.LastErrorText + "\r\n");
+                RetStateEnevt(false);
                 return;
             }
             //  Retrieve the output.
             success = ssh.ChannelReceiveUntilMatch(channelNum, myPrompt, "ansi", true);
             if (success != true)
             {
-                SSHMessage.Text += ssh.LastErrorText + "\r\n";
+                RetMessageEvent(ssh.LastErrorText + "\r\n");
+                RetStateEnevt(false);
                 return;
             }
-            //   Display what we've received so far.  This clears
-            //   the internal receive buffer, which is important.
-            //   After we send the command, we'll be reading until
-            //   the next command prompt.  If the command prompt
-            //   is already in the internal receive buffer, it'll think it's
-            //   already finished...
+            RetPressEvent(40);
             cmdOutput = ssh.GetReceivedText(channelNum, "ansi");
             if (cmdOutput == null)
             {
-                SSHMessage.Text += ssh.LastErrorText + "\r\n";
+                RetMessageEvent(ssh.LastErrorText + "\r\n");
+                RetStateEnevt(false);
                 return;
             }
-
-            SSHMessage.Text += cmdOutput.Replace("[0m", "") +"\r\n";
-
-            
+            RetMessageEvent( cmdOutput.Replace("[0m", "") +"\r\n");   
            
             //  Send an EOF.  This tells the server that no more data will
             //  be sent on this channel.  The channel remains open, and
@@ -120,36 +135,28 @@ namespace InstallLaneApp
             success = ssh.ChannelSendEof(channelNum);
             if (success != true)
             {
-                SSHMessage.Text += ssh.LastErrorText + "\r\n";
+                RetMessageEvent(ssh.LastErrorText + "\r\n");
+                RetStateEnevt(false);
                 return;
             }
-            //  Read whatever output may already be available on the
-            //  SSH connection.  ChannelReadAndPoll returns the number of bytes
-            //  that are available in the channel's internal buffer that
-            //  are ready to be "picked up" by calling GetReceivedText
-            //  or GetReceivedData.
-            //  A return value of -1 indicates failure.
-            //  A return value of -2 indicates a failure via timeout.
-
-            //  The ChannelReadAndPoll method waits
-            //  for data to arrive on the connection usingi the IdleTimeoutMs
-            //  property setting.  Once the first data arrives, it continues
-            //  reading but instead uses the pollTimeoutMs passed in the 2nd argument:
-            //  A return value of -2 indicates a timeout where no data is received.
+ 
             int n;
             int pollTimeoutMs;
             pollTimeoutMs = 2000;
             n = ssh.ChannelReadAndPoll(channelNum, pollTimeoutMs);
             if (n < 0)
             {
-                SSHMessage.Text += ssh.LastErrorText + "\r\n";
+                RetMessageEvent(ssh.LastErrorText + "\r\n");
+                RetStateEnevt(false);
                 return;
             }
+            RetPressEvent(80);
             //  Close the channel:
             success = ssh.ChannelSendClose(channelNum);
             if (success != true)
             {
-                SSHMessage.Text += ssh.LastErrorText + "\r\n";
+                RetMessageEvent(ssh.LastErrorText + "\r\n");
+                RetStateEnevt(false);
                 return;
             }
             //  Perhaps we did not receive all of the commands output.
@@ -158,17 +165,20 @@ namespace InstallLaneApp
             success = ssh.ChannelReceiveToClose(channelNum);
             if (success != true)
             {
-                SSHMessage.Text += ssh.LastErrorText + "\r\n";
+                RetMessageEvent(ssh.LastErrorText + "\r\n");
+                RetStateEnevt(false);
                 return;
             }
 
             cmdOutput = ssh.GetReceivedText(channelNum, "ansi").Replace("[0m", "");
             if (cmdOutput == null)
             {
-                SSHMessage.Text += ssh.LastErrorText + "\r\n";
+                RetMessageEvent(ssh.LastErrorText + "\r\n");
+                RetStateEnevt(false);
                 return;
             }
-            SSHMessage.Text += cmdOutput + "\r\n";
+            RetMessageEvent(cmdOutput + "\r\n");
+            RetPressEvent(100);
             //  Disconnect
             ssh.Disconnect();
         }

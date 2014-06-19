@@ -97,18 +97,39 @@ namespace InstallLaneApp
 
         string UploadFile(string localFilePath,string remoteFilePath)
         {
-           return SFtptools.SftpUpload(TxtIP.Text, TxtUserName.Text, TxtPwd.Text, localFilePath, remoteFilePath);
+           string IP = string.Format("{0}{1}", TxtIP.Text, TxtIP4.Text);
+           return SFtptools.SftpUpload(IP, TxtUserName.Text, TxtPwd.Text, localFilePath, remoteFilePath);
         }
         void ExecCmd(string CmdString)
         {
-            SSh2Tools.SSHRSMC(TxtIP.Text, TxtUserName.Text, TxtPwd.Text, CmdString, TxtRet);
+            SSh2Tools SSh = new SSh2Tools();
+            SSh.RetMessageEvent += SSh_RetMessageEvent;
+            SSh.RetPressEvent += SSh_RetPressEvent;
+            SSh.RetStateEnevt += SSh_RetStateEnevt;
+            string IP = string.Format("{0}{1}", TxtIP.Text,TxtIP4.Text);
+            SSh.SSHRSMC(IP, TxtUserName.Text, TxtPwd.Text, CmdString);
          
+        }
+        bool RetState = true;
+        void SSh_RetStateEnevt(bool ret)
+        {
+            RetState = ret;
+        }
+        int RetValue = 0;
+        void SSh_RetPressEvent(int Input)
+        {
+            RetValue = Input;
+        }
+        string RetMsg = "";
+        void SSh_RetMessageEvent(string Message)
+        {
+            RetMsg += Message;
         }
         void ExecMultipleMachine(string IPHead,int StartIP,int Count)
         {
             for (int i = 0; i < Count; i++)
             {
-                string IP = string.Format("{0}{1}", IPHead, StartIP + Count);
+                string IP = string.Format("{0}{1}", IPHead, StartIP + i);
 
                 ExecCommadFrm Frm = new ExecCommadFrm();
                 Frm.IP = IP;
@@ -118,14 +139,13 @@ namespace InstallLaneApp
                 Frm.Show();
             }
         }
-        private void BtnExec_Click(object sender, EventArgs e)
+        void RunCommand()
         {
-            SetCommand(CbxCommandList.Text);
-            if (CheckSinle.Checked)
-            {
-               
                 if (null != SelectCommd)
                 {
+
+                  
+                    
                     foreach (UploadFile tmp in SelectCommd.UploadFileList)
                     {
                         UploadFile(string.Format(@"Command\{0}", tmp.FilePath), string.Format(@"/mnt/{0}", tmp.FilePath));
@@ -133,6 +153,16 @@ namespace InstallLaneApp
                     ExecCmd(string.Format(@"chmod +x /mnt/ -R ", SelectCommd.ExecFileName));
                     ExecCmd(string.Format(@"/mnt/{0}", SelectCommd.ExecFileName));
                 }
+        }
+        private void BtnExec_Click(object sender, EventArgs e)
+        {
+            SetCommand(CbxCommandList.Text);
+            if (CheckSinle.Checked)
+            {
+                LabMessage.Text = "Please Wait ……!";
+                LabMessage.ForeColor = System.Drawing.Color.Cyan;
+                Thread Th = new Thread(RunCommand);
+                Th.Start();
             }
             else
             {
@@ -216,7 +246,7 @@ namespace InstallLaneApp
 
         private void BtnClearMsg_Click(object sender, EventArgs e)
         {
-            TxtRet.Text = "";
+            RetMsg = "";
         }
 
 
@@ -229,6 +259,25 @@ namespace InstallLaneApp
             TxtEStartIP.Enabled = !CheckSinle.Checked;
             TxtXStartIP.Enabled = !CheckSinle.Checked;
             TxtIP4.Enabled = CheckSinle.Checked;
+        }
+
+        private void TmResfh_Tick(object sender, EventArgs e)
+        {
+            TxtRet.Text = RetMsg;
+            PbExec.Value = RetValue;
+            if (100 == PbExec.Value)
+            {
+                LabMessage.Text = "Command Run Success!";
+                LabMessage.ForeColor = System.Drawing.Color.Green;
+                
+            }
+            if (!RetState)
+            {
+               
+                LabMessage.Text = "Command Run Failure!";
+                LabMessage.ForeColor = System.Drawing.Color.Red;
+               
+            }
         }
     }
 }

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.label1 = new System.Windows.Forms.Label();
             this.TxtIP = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -58,21 +59,23 @@
             this.TxtXcount = new System.Windows.Forms.TextBox();
             this.CheckSinle = new System.Windows.Forms.CheckBox();
             this.TxtIP4 = new System.Windows.Forms.TextBox();
+            this.PbExec = new System.Windows.Forms.ProgressBar();
+            this.TmResfh = new System.Windows.Forms.Timer(this.components);
+            this.LabMessage = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(67, 83);
+            this.label1.Location = new System.Drawing.Point(56, 83);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(53, 12);
+            this.label1.Size = new System.Drawing.Size(59, 12);
             this.label1.TabIndex = 0;
-            this.label1.Text = "IP Heard";
-          
+            this.label1.Text = "IP Heard:";
             // 
             // TxtIP
             // 
-            this.TxtIP.Location = new System.Drawing.Point(127, 78);
+            this.TxtIP.Location = new System.Drawing.Point(127, 79);
             this.TxtIP.Name = "TxtIP";
             this.TxtIP.Size = new System.Drawing.Size(128, 21);
             this.TxtIP.TabIndex = 1;
@@ -81,15 +84,15 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(55, 123);
+            this.label2.Location = new System.Drawing.Point(50, 132);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(59, 12);
+            this.label2.Size = new System.Drawing.Size(65, 12);
             this.label2.TabIndex = 0;
-            this.label2.Text = "User Name";
+            this.label2.Text = "User Name:";
             // 
             // TxtUserName
             // 
-            this.TxtUserName.Location = new System.Drawing.Point(127, 119);
+            this.TxtUserName.Location = new System.Drawing.Point(127, 128);
             this.TxtUserName.Name = "TxtUserName";
             this.TxtUserName.Size = new System.Drawing.Size(701, 21);
             this.TxtUserName.TabIndex = 1;
@@ -98,15 +101,15 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(61, 154);
+            this.label3.Location = new System.Drawing.Point(56, 165);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(53, 12);
+            this.label3.Size = new System.Drawing.Size(59, 12);
             this.label3.TabIndex = 0;
-            this.label3.Text = "PassWord";
+            this.label3.Text = "PassWord:";
             // 
             // TxtPwd
             // 
-            this.TxtPwd.Location = new System.Drawing.Point(127, 151);
+            this.TxtPwd.Location = new System.Drawing.Point(127, 161);
             this.TxtPwd.Name = "TxtPwd";
             this.TxtPwd.PasswordChar = '*';
             this.TxtPwd.Size = new System.Drawing.Size(701, 21);
@@ -116,15 +119,15 @@
             // cmd
             // 
             this.cmd.AutoSize = true;
-            this.cmd.Location = new System.Drawing.Point(49, 184);
+            this.cmd.Location = new System.Drawing.Point(44, 198);
             this.cmd.Name = "cmd";
-            this.cmd.Size = new System.Drawing.Size(65, 12);
+            this.cmd.Size = new System.Drawing.Size(71, 12);
             this.cmd.TabIndex = 0;
-            this.cmd.Text = "Select Cmd";
+            this.cmd.Text = "Select Cmd:";
             // 
             // BtnExec
             // 
-            this.BtnExec.Location = new System.Drawing.Point(753, 181);
+            this.BtnExec.Location = new System.Drawing.Point(753, 193);
             this.BtnExec.Name = "BtnExec";
             this.BtnExec.Size = new System.Drawing.Size(75, 23);
             this.BtnExec.TabIndex = 2;
@@ -134,7 +137,7 @@
             // 
             // BtnClose
             // 
-            this.BtnClose.Location = new System.Drawing.Point(752, 547);
+            this.BtnClose.Location = new System.Drawing.Point(752, 571);
             this.BtnClose.Name = "BtnClose";
             this.BtnClose.Size = new System.Drawing.Size(75, 23);
             this.BtnClose.TabIndex = 2;
@@ -144,7 +147,7 @@
             // 
             // TxtRet
             // 
-            this.TxtRet.Location = new System.Drawing.Point(127, 255);
+            this.TxtRet.Location = new System.Drawing.Point(127, 259);
             this.TxtRet.Multiline = true;
             this.TxtRet.Name = "TxtRet";
             this.TxtRet.ScrollBars = System.Windows.Forms.ScrollBars.Both;
@@ -153,7 +156,7 @@
             // 
             // BtnConfig
             // 
-            this.BtnConfig.Location = new System.Drawing.Point(665, 547);
+            this.BtnConfig.Location = new System.Drawing.Point(665, 571);
             this.BtnConfig.Name = "BtnConfig";
             this.BtnConfig.Size = new System.Drawing.Size(75, 23);
             this.BtnConfig.TabIndex = 5;
@@ -164,7 +167,7 @@
             // CbxCommandList
             // 
             this.CbxCommandList.FormattingEnabled = true;
-            this.CbxCommandList.Location = new System.Drawing.Point(127, 184);
+            this.CbxCommandList.Location = new System.Drawing.Point(127, 194);
             this.CbxCommandList.Name = "CbxCommandList";
             this.CbxCommandList.Size = new System.Drawing.Size(619, 20);
             this.CbxCommandList.TabIndex = 6;
@@ -173,15 +176,15 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(91, 222);
+            this.label4.Location = new System.Drawing.Point(86, 230);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(23, 12);
+            this.label4.Size = new System.Drawing.Size(29, 12);
             this.label4.TabIndex = 0;
-            this.label4.Text = "Cmd";
+            this.label4.Text = "Cmd:";
             // 
             // BtnRun
             // 
-            this.BtnRun.Location = new System.Drawing.Point(752, 216);
+            this.BtnRun.Location = new System.Drawing.Point(752, 225);
             this.BtnRun.Name = "BtnRun";
             this.BtnRun.Size = new System.Drawing.Size(75, 23);
             this.BtnRun.TabIndex = 7;
@@ -192,7 +195,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(74, 258);
+            this.label8.Location = new System.Drawing.Point(68, 258);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(47, 12);
             this.label8.TabIndex = 8;
@@ -200,7 +203,7 @@
             // 
             // BtnClearMsg
             // 
-            this.BtnClearMsg.Location = new System.Drawing.Point(578, 547);
+            this.BtnClearMsg.Location = new System.Drawing.Point(578, 571);
             this.BtnClearMsg.Name = "BtnClearMsg";
             this.BtnClearMsg.Size = new System.Drawing.Size(75, 23);
             this.BtnClearMsg.TabIndex = 9;
@@ -214,7 +217,7 @@
             this.CbxRunCmd.Items.AddRange(new object[] {
             "ls /EMRCV5/BIN",
             "cat /EMRCV5/CONFIG/AppFunction.ini"});
-            this.CbxRunCmd.Location = new System.Drawing.Point(127, 219);
+            this.CbxRunCmd.Location = new System.Drawing.Point(127, 226);
             this.CbxRunCmd.Name = "CbxRunCmd";
             this.CbxRunCmd.Size = new System.Drawing.Size(619, 20);
             this.CbxRunCmd.TabIndex = 6;
@@ -241,7 +244,7 @@
             // label6
             // 
             this.label6.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.label6.Location = new System.Drawing.Point(5, 527);
+            this.label6.Location = new System.Drawing.Point(5, 551);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(844, 2);
             this.label6.TabIndex = 11;
@@ -249,17 +252,16 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(280, 66);
+            this.label7.Location = new System.Drawing.Point(470, 66);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(59, 12);
+            this.label7.Size = new System.Drawing.Size(65, 12);
             this.label7.TabIndex = 0;
-            this.label7.Text = "E StartIP";
-         
+            this.label7.Text = "E StartIP:";
             // 
             // TxtEStartIP
             // 
             this.TxtEStartIP.Enabled = false;
-            this.TxtEStartIP.Location = new System.Drawing.Point(351, 62);
+            this.TxtEStartIP.Location = new System.Drawing.Point(541, 62);
             this.TxtEStartIP.Name = "TxtEStartIP";
             this.TxtEStartIP.Size = new System.Drawing.Size(104, 21);
             this.TxtEStartIP.TabIndex = 1;
@@ -268,17 +270,16 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(466, 66);
+            this.label10.Location = new System.Drawing.Point(667, 66);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(47, 12);
+            this.label10.Size = new System.Drawing.Size(53, 12);
             this.label10.TabIndex = 0;
-            this.label10.Text = "E Count";
-      
+            this.label10.Text = "E Count:";
             // 
             // TxtEcount
             // 
             this.TxtEcount.Enabled = false;
-            this.TxtEcount.Location = new System.Drawing.Point(520, 62);
+            this.TxtEcount.Location = new System.Drawing.Point(724, 62);
             this.TxtEcount.Name = "TxtEcount";
             this.TxtEcount.Size = new System.Drawing.Size(104, 21);
             this.TxtEcount.TabIndex = 1;
@@ -287,17 +288,16 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(280, 97);
+            this.label11.Location = new System.Drawing.Point(470, 99);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(59, 12);
+            this.label11.Size = new System.Drawing.Size(65, 12);
             this.label11.TabIndex = 0;
-            this.label11.Text = "X StartIP";
-        
+            this.label11.Text = "X StartIP:";
             // 
             // TxtXStartIP
             // 
             this.TxtXStartIP.Enabled = false;
-            this.TxtXStartIP.Location = new System.Drawing.Point(351, 93);
+            this.TxtXStartIP.Location = new System.Drawing.Point(541, 95);
             this.TxtXStartIP.Name = "TxtXStartIP";
             this.TxtXStartIP.Size = new System.Drawing.Size(104, 21);
             this.TxtXStartIP.TabIndex = 1;
@@ -306,17 +306,16 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(466, 97);
+            this.label12.Location = new System.Drawing.Point(667, 99);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(47, 12);
+            this.label12.Size = new System.Drawing.Size(53, 12);
             this.label12.TabIndex = 0;
-            this.label12.Text = "X Count";
-          
+            this.label12.Text = "X Count:";
             // 
             // TxtXcount
             // 
             this.TxtXcount.Enabled = false;
-            this.TxtXcount.Location = new System.Drawing.Point(520, 93);
+            this.TxtXcount.Location = new System.Drawing.Point(724, 95);
             this.TxtXcount.Name = "TxtXcount";
             this.TxtXcount.Size = new System.Drawing.Size(104, 21);
             this.TxtXcount.TabIndex = 1;
@@ -327,28 +326,52 @@
             this.CheckSinle.AutoSize = true;
             this.CheckSinle.Checked = true;
             this.CheckSinle.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.CheckSinle.Location = new System.Drawing.Point(656, 78);
+            this.CheckSinle.Location = new System.Drawing.Point(279, 81);
             this.CheckSinle.Name = "CheckSinle";
             this.CheckSinle.Size = new System.Drawing.Size(60, 16);
             this.CheckSinle.TabIndex = 12;
             this.CheckSinle.Text = "Single";
             this.CheckSinle.UseVisualStyleBackColor = true;
             this.CheckSinle.CheckedChanged += new System.EventHandler(this.CheckSinle_CheckedChanged);
-          
             // 
             // TxtIP4
             // 
-            this.TxtIP4.Location = new System.Drawing.Point(724, 75);
+            this.TxtIP4.Location = new System.Drawing.Point(347, 79);
             this.TxtIP4.Name = "TxtIP4";
             this.TxtIP4.Size = new System.Drawing.Size(101, 21);
             this.TxtIP4.TabIndex = 1;
             this.TxtIP4.Text = "2";
             // 
+            // PbExec
+            // 
+            this.PbExec.Location = new System.Drawing.Point(127, 524);
+            this.PbExec.Name = "PbExec";
+            this.PbExec.Size = new System.Drawing.Size(701, 23);
+            this.PbExec.TabIndex = 21;
+            // 
+            // TmResfh
+            // 
+            this.TmResfh.Enabled = true;
+            this.TmResfh.Interval = 1000;
+            this.TmResfh.Tick += new System.EventHandler(this.TmResfh_Tick);
+            // 
+            // LabMessage
+            // 
+            this.LabMessage.Font = new System.Drawing.Font("宋体", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.LabMessage.ForeColor = System.Drawing.Color.Cyan;
+            this.LabMessage.Location = new System.Drawing.Point(121, 561);
+            this.LabMessage.Name = "LabMessage";
+            this.LabMessage.Size = new System.Drawing.Size(445, 33);
+            this.LabMessage.TabIndex = 22;
+            this.LabMessage.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
             // InstalllanAppFrom
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(851, 577);
+            this.ClientSize = new System.Drawing.Size(851, 601);
+            this.Controls.Add(this.LabMessage);
+            this.Controls.Add(this.PbExec);
             this.Controls.Add(this.CheckSinle);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label9);
@@ -419,5 +442,8 @@
         private System.Windows.Forms.TextBox TxtXcount;
         private System.Windows.Forms.CheckBox CheckSinle;
         private System.Windows.Forms.TextBox TxtIP4;
+        private System.Windows.Forms.ProgressBar PbExec;
+        private System.Windows.Forms.Timer TmResfh;
+        private System.Windows.Forms.Label LabMessage;
     }
 }

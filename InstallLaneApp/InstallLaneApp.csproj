@@ -17,7 +17,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
+    <OutputPath>..\INSTALL\Lane\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -35,6 +35,9 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ChilkatDotNet45">
+      <HintPath>..\INSTALL\Lane\ChilkatDotNet45.dll</HintPath>
+    </Reference>
     <Reference Include="Routrek.granados">
       <HintPath>E:\granados200\bin\Routrek.granados.dll</HintPath>
     </Reference>
@@ -50,17 +53,39 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ExecCommadFrm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ExecCommadFrm.Designer.cs">
+      <DependentUpon>ExecCommadFrm.cs</DependentUpon>
+    </Compile>
     <Compile Include="InstalllanAppFrom.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="InstalllanAppFrom.Designer.cs">
       <DependentUpon>InstalllanAppFrom.cs</DependentUpon>
     </Compile>
+    <Compile Include="LanCommandConfigFrm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LanCommandConfigFrm.Designer.cs">
+      <DependentUpon>LanCommandConfigFrm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LaneCommand.cs" />
+    <Compile Include="LanToolsConfig.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Reader.cs" />
+    <Compile Include="SFtptools.cs" />
+    <Compile Include="SSh2Tools.cs" />
+    <EmbeddedResource Include="ExecCommadFrm.resx">
+      <DependentUpon>ExecCommadFrm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="InstalllanAppFrom.resx">
       <DependentUpon>InstalllanAppFrom.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LanCommandConfigFrm.resx">
+      <DependentUpon>LanCommandConfigFrm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

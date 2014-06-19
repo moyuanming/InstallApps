@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<InstallItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <AppList>
+    <App>
+      <AppName>参数管理</AppName>
+      <ICOName>11</ICOName>
+      <ExecName>全封闭(分)中心参数管理系统.exe</ExecName>
+      <SvnPath>REPORT</SvnPath>
+    </App>
+  </AppList>
+</InstallItem>

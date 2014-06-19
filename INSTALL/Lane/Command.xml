@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<LanToolsConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <CommandList>
+    <LaneCommand>
+      <Name>初始化车道程序</Name>
+      <ExecFileName>InitSoft.cgi</ExecFileName>
+      <CommandLeve>0</CommandLeve>
+      <UploadFileList>
+        <UploadFile>
+          <FilePath>InitSoft.cgi</FilePath>
+        </UploadFile>
+      </UploadFileList>
+    </LaneCommand>
+    <LaneCommand>
+      <Name>UpdateLanSoft</Name>
+      <ExecFileName>UpdateSoft.cgi</ExecFileName>
+      <CommandLeve>0</CommandLeve>
+      <UploadFileList>
+        <UploadFile>
+          <FilePath>UpdateSoft.cgi</FilePath>
+        </UploadFile>
+      </UploadFileList>
+    </LaneCommand>
+  </CommandList>
+  <EStartIP>71</EStartIP>
+  <XstartIP>51</XstartIP>
+  <ECount>4</ECount>
+  <Xcount>4</Xcount>
+</LanToolsConfig>

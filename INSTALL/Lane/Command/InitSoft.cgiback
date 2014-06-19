@@ -1,0 +1,32 @@
+#! /bin/sh
+
+echo "Content-Type:text/html;charset=gb2312;"
+
+
+echo ""
+echo ""
+
+
+
+
+
+
+
+
+rm /EMRCV4 -rf
+
+IP=$(ifconfig -a|grep inet|grep -v 127.0.0.1|grep -v inet6|awk '{if(NR==1)print $2}'|tr -d "addr:")
+Lane=$(echo $IP | awk -F "." '{print $4}')
+#echo $IP
+ServerIP=192.168.60.200
+##SvnPath= $ServerIP/$Lane
+#echo $Lane
+svn co --username mym --password future svn://$ServerIP/LaneSoft/$Lane /EMRCV4
+cd /EMRCV4
+#mv BIN BIN_ARM
+#ln -s BIN_X86 BIN
+chmod +x BIN/*
+
+
+
+

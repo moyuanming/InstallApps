@@ -1,0 +1,10 @@
+#! /bin/sh
+
+echo "Content-Type:text/html;charset=gb2312;"
+
+
+echo ""
+echo ""
+
+
+echo "holle word"

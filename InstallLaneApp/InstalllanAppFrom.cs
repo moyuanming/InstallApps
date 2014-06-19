@@ -95,28 +95,140 @@ namespace InstallLaneApp
             _pf = channel;
         }
 
-      
+        string UploadFile(string localFilePath,string remoteFilePath)
+        {
+           return SFtptools.SftpUpload(TxtIP.Text, TxtUserName.Text, TxtPwd.Text, localFilePath, remoteFilePath);
+        }
+        void ExecCmd(string CmdString)
+        {
+            SSh2Tools.SSHRSMC(TxtIP.Text, TxtUserName.Text, TxtPwd.Text, CmdString, TxtRet);
+         
+        }
+        void ExecMultipleMachine(string IPHead,int StartIP,int Count)
+        {
+            for (int i = 0; i < Count; i++)
+            {
+                string IP = string.Format("{0}{1}", IPHead, StartIP + Count);
+
+                ExecCommadFrm Frm = new ExecCommadFrm();
+                Frm.IP = IP;
+                Frm.UserName = TxtUserName.Text;
+                Frm.Pwd = TxtPwd.Text;
+                Frm.MyCommand = SelectCommd;
+                Frm.Show();
+            }
+        }
         private void BtnExec_Click(object sender, EventArgs e)
         {
-            SSHConnectionParameter f = new SSHConnectionParameter();
-            f.UserName = "root";
-            f.Password = "kissme";
-            f.Protocol = SSHProtocol.SSH2;
-            f.AuthenticationType = AuthenticationType.Password;
-            f.WindowSize = 0x1000;
-            Reader reader = new Reader();
-            Socket s = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-            s.Connect(new IPEndPoint(IPAddress.Parse("10.3.55.51"), 22));
-            _conn = SSHConnection.Connect(f, this, s);
-            SSHChannel ch = _conn.OpenShell(this);
-            _pf = ch;
-            SSHConnectionInfo ci = _conn.ConnectionInfo;
-            Thread.Sleep(1000);
-          
-            string cmd = ">mym \n";
-            byte[] data = (new UnicodeEncoding()).GetBytes(cmd);
-            _pf.Transmit(data);
-            _conn.Close();
+            SetCommand(CbxCommandList.Text);
+            if (CheckSinle.Checked)
+            {
+               
+                if (null != SelectCommd)
+                {
+                    foreach (UploadFile tmp in SelectCommd.UploadFileList)
+                    {
+                        UploadFile(string.Format(@"Command\{0}", tmp.FilePath), string.Format(@"/mnt/{0}", tmp.FilePath));
+                    }
+                    ExecCmd(string.Format(@"chmod +x /mnt/ -R ", SelectCommd.ExecFileName));
+                    ExecCmd(string.Format(@"/mnt/{0}", SelectCommd.ExecFileName));
+                }
+            }
+            else
+            {
+
+                ExecMultipleMachine(TxtIP.Text, Convert.ToInt32(TxtEStartIP.Text), Convert.ToInt32(TxtEcount.Text));
+                ExecMultipleMachine(TxtIP.Text, Convert.ToInt32(TxtXStartIP.Text), Convert.ToInt32(TxtXcount.Text));              
+            }
+            
+            return;
+
+
+
+
+        }
+
+     
+
+        private void BtnConfig_Click(object sender, EventArgs e)
+        {
+            LanCommandConfigFrm frm = new LanCommandConfigFrm();
+            frm.ShowDialog();
+
+
+            LoadCommandFile();
+           
+        }
+        LanToolsConfig Lts;
+        LaneCommand SelectCommd;
+        void SetCommand(string CommandName)
+        {
+           
+            foreach (LaneCommand tmp in Lts.CommandList)
+            {
+                if (CommandName == tmp.Name)
+                {
+                    SelectCommd = tmp;
+                    return ;
+                }
+            }
+            SelectCommd = null;
+        }
+        void LoadCommandFile()
+        {
+            CbxCommandList.Items.Clear();
+            try
+            {
+                Lts = LanToolsConfig.LoadFile("Command.xml");
+
+                foreach (LaneCommand tmp in Lts.CommandList)
+                {
+                    CbxCommandList.Items.Add(tmp.Name);
+
+                }
+                CbxCommandList.SelectedIndex = 0;
+                TxtXcount.Text = Lts.Xcount.ToString();
+                TxtEcount.Text = Lts.ECount.ToString();
+                TxtXStartIP.Text = Lts.XstartIP.ToString();
+                TxtEStartIP.Text = Lts.EStartIP.ToString();
+
+            }
+            catch (System.Exception ex)
+            {
+                MessageBox.Show("没有可以安装的程序！！检查Apps.xml是否存在");
+
+            }
+        }
+        private void InstalllanAppFrom_Load(object sender, EventArgs e)
+        {
+            LoadCommandFile();
+        }
+
+        private void BtnClose_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void BtnRun_Click(object sender, EventArgs e)
+        {
+            ExecCmd(CbxRunCmd.Text);
+        }
+
+        private void BtnClearMsg_Click(object sender, EventArgs e)
+        {
+            TxtRet.Text = "";
+        }
+
+
+   
+
+        private void CheckSinle_CheckedChanged(object sender, EventArgs e)
+        {
+            TxtEcount.Enabled = !CheckSinle.Checked;
+            TxtXcount.Enabled = !CheckSinle.Checked;
+            TxtEStartIP.Enabled = !CheckSinle.Checked;
+            TxtXStartIP.Enabled = !CheckSinle.Checked;
+            TxtIP4.Enabled = CheckSinle.Checked;
         }
     }
 }

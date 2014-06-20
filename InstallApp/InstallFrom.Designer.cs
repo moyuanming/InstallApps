@@ -48,11 +48,14 @@
             this.label9 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.BtnClearMsg = new System.Windows.Forms.Button();
+            this.BtnSetTime = new System.Windows.Forms.Button();
+            this.label10 = new System.Windows.Forms.Label();
+            this.BtnSetTime8 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // BtnInstall
             // 
-            this.BtnInstall.Location = new System.Drawing.Point(193, 431);
+            this.BtnInstall.Location = new System.Drawing.Point(282, 433);
             this.BtnInstall.Name = "BtnInstall";
             this.BtnInstall.Size = new System.Drawing.Size(75, 23);
             this.BtnInstall.TabIndex = 0;
@@ -62,7 +65,7 @@
             // 
             // BtnUpdate
             // 
-            this.BtnUpdate.Location = new System.Drawing.Point(280, 431);
+            this.BtnUpdate.Location = new System.Drawing.Point(369, 433);
             this.BtnUpdate.Name = "BtnUpdate";
             this.BtnUpdate.Size = new System.Drawing.Size(75, 23);
             this.BtnUpdate.TabIndex = 1;
@@ -72,7 +75,7 @@
             // 
             // BtnClose
             // 
-            this.BtnClose.Location = new System.Drawing.Point(541, 431);
+            this.BtnClose.Location = new System.Drawing.Point(541, 486);
             this.BtnClose.Name = "BtnClose";
             this.BtnClose.Size = new System.Drawing.Size(75, 23);
             this.BtnClose.TabIndex = 2;
@@ -231,7 +234,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(454, 431);
+            this.button1.Location = new System.Drawing.Point(543, 433);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 1;
@@ -241,7 +244,7 @@
             // 
             // BtnClearMsg
             // 
-            this.BtnClearMsg.Location = new System.Drawing.Point(367, 431);
+            this.BtnClearMsg.Location = new System.Drawing.Point(456, 433);
             this.BtnClearMsg.Name = "BtnClearMsg";
             this.BtnClearMsg.Size = new System.Drawing.Size(75, 23);
             this.BtnClearMsg.TabIndex = 1;
@@ -249,11 +252,42 @@
             this.BtnClearMsg.UseVisualStyleBackColor = true;
             this.BtnClearMsg.Click += new System.EventHandler(this.BtnClearMsg_Click);
             // 
+            // BtnSetTime
+            // 
+            this.BtnSetTime.Location = new System.Drawing.Point(375, 486);
+            this.BtnSetTime.Name = "BtnSetTime";
+            this.BtnSetTime.Size = new System.Drawing.Size(75, 23);
+            this.BtnSetTime.TabIndex = 8;
+            this.BtnSetTime.Text = "UTC";
+            this.BtnSetTime.UseVisualStyleBackColor = true;
+            this.BtnSetTime.Click += new System.EventHandler(this.BtnSetTime_Click);
+            // 
+            // label10
+            // 
+            this.label10.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.label10.Location = new System.Drawing.Point(6, 469);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(644, 2);
+            this.label10.TabIndex = 9;
+            // 
+            // BtnSetTime8
+            // 
+            this.BtnSetTime8.Location = new System.Drawing.Point(458, 486);
+            this.BtnSetTime8.Name = "BtnSetTime8";
+            this.BtnSetTime8.Size = new System.Drawing.Size(75, 23);
+            this.BtnSetTime8.TabIndex = 10;
+            this.BtnSetTime8.Text = "UTC+8";
+            this.BtnSetTime8.UseVisualStyleBackColor = true;
+            this.BtnSetTime8.Click += new System.EventHandler(this.BtnSetTime8_Click);
+            // 
             // InstallFrom
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(656, 463);
+            this.ClientSize = new System.Drawing.Size(656, 531);
+            this.Controls.Add(this.BtnSetTime8);
+            this.Controls.Add(this.label10);
+            this.Controls.Add(this.BtnSetTime);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.CbxPlaza);
@@ -275,9 +309,7 @@
             this.Controls.Add(this.BtnUpdate);
             this.Controls.Add(this.BtnInstall);
             this.MaximizeBox = false;
-            this.MaximumSize = new System.Drawing.Size(672, 502);
             this.MinimizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(672, 502);
             this.Name = "InstallFrom";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Install Tools";
@@ -309,5 +341,8 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button BtnClearMsg;
+        private System.Windows.Forms.Button BtnSetTime;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Button BtnSetTime8;
     }
 }

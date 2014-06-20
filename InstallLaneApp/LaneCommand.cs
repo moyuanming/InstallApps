@@ -25,6 +25,17 @@ namespace InstallLaneApp
         }
     }
     [Serializable]
+    public class ExecCommands
+    {
+        string _Command;
+        public string Command
+        {
+            get { return _Command; }
+            set { _Command = value; }
+        }
+       
+    }
+    [Serializable]
  public   class LaneCommand
     {
         string _Name;

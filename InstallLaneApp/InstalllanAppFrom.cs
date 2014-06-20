@@ -43,6 +43,7 @@ namespace InstallLaneApp
         void LoadCommandFile()
         {
             CbxCommandList.Items.Clear();
+            CbxRunCmd.Items.Clear();
             try
             {
                 Lts = LanToolsConfig.LoadFile("Command.xml");
@@ -52,6 +53,12 @@ namespace InstallLaneApp
                     CbxCommandList.Items.Add(tmp.Name);
 
                 }
+                foreach (ExecCommands tmp in Lts.Commands)
+                {
+                    CbxRunCmd.Items.Add(tmp.Command);
+
+                }
+
                 CbxCommandList.SelectedIndex = 0;
                 TxtXcount.Text = Lts.Xcount.ToString();
                 TxtEcount.Text = Lts.ECount.ToString();

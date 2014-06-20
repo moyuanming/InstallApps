@@ -22,6 +22,20 @@
       </UploadFileList>
     </LaneCommand>
   </CommandList>
+  <Commands>
+    <ExecCommands>
+      <Command>ls /EMRCV5/</Command>
+    </ExecCommands>
+    <ExecCommands>
+      <Command> cat /EMRCV5/CONFIG/AppFunction.ini</Command>
+    </ExecCommands>
+    <ExecCommands>
+      <Command>cat /EMRCV5/CONFIG/CommunctionConfig.ini</Command>
+    </ExecCommands>
+    <ExecCommands>
+      <Command>cat /EMRCV5/CONFIG/Config.ini</Command>
+    </ExecCommands>
+  </Commands>
   <EStartIP>71</EStartIP>
   <XstartIP>51</XstartIP>
   <ECount>3</ECount>

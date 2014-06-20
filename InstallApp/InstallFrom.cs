@@ -174,5 +174,49 @@ namespace InstallApp
             ConfigInstallApp Frm = new ConfigInstallApp();
             Frm.ShowDialog();
         }
+
+        private void BtnSetTime_Click(object sender, EventArgs e)
+        {
+            SystemTime syst = new SystemTime();
+            TimeZoneInformation newtzi = new TimeZoneInformation();
+            syst.year = 0;
+            syst.month = 0;
+            syst.dayOfWeek = 0;
+            syst.day = 0;
+            syst.hour = 0;
+            syst.minute = 0;
+            syst.second = 0;
+
+
+            newtzi.daylightDate = syst;
+            newtzi.daylightName = "(UTC)协调世界时";
+            newtzi.standardBias = 0;
+            newtzi.standardDate = syst;
+            newtzi.standardName = "协调世界时";
+            TimeZoneControl.SetTimeZone(newtzi);
+        }
+
+        private void BtnSetTime8_Click(object sender, EventArgs e)
+        {
+            SystemTime syst = new SystemTime();
+            TimeZoneInformation newtzi = new TimeZoneInformation();
+            syst.year = 0;
+            syst.month = 0;
+            syst.dayOfWeek = 0;
+            syst.day = 0;
+            syst.hour = 0;
+            syst.minute = 0;
+            syst.second = 0;
+
+            newtzi.bias = -480;
+            newtzi.daylightDate = syst;
+            newtzi.daylightName = "(UTC+08:00)北京，重庆，香港特别行政区，乌鲁木齐";
+            newtzi.standardBias = 0;
+            newtzi.standardDate = syst;
+            newtzi.standardName = "中国标准时间";
+            TimeZoneControl.SetTimeZone(newtzi);
+        }
+
+      
     }
 }

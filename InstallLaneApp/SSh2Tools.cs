@@ -16,6 +16,18 @@ namespace InstallLaneApp
         public event RetMessage RetMessageEvent;
         public event RetPress RetPressEvent;
         public event RetState  RetStateEnevt;
+
+        string  ConvertBM(string inputstr)
+        {
+            Encoding utf8 = System.Text.Encoding.ASCII;
+            Encoding gb2312 = Encoding.GetEncoding("ansi");//Encoding.Default ,936
+            byte[] temp = utf8.GetBytes(inputstr);
+            byte[] temp1 = Encoding.Convert(utf8, gb2312, temp);
+            string result = gb2312.GetString(temp1);
+            return result;
+        }
+
+
         public  void SSHRSMC(string hostname,string UserName,string  Pwd,string Command)
         {
             try
@@ -25,14 +37,21 @@ namespace InstallLaneApp
                 SshExec exec = new SshExec(hostname, UserName);
                 RetPressEvent(30);
                 exec.Password = Pwd;
-                RetMessageEvent("SSh  Connect");
+                RetMessageEvent("SSh  Connecting ");
                 exec.Connect();
                 RetPressEvent(50);
-                RetMessageEvent("Run Command " + Command);
+                RetMessageEvent("Run Command: " + Command);
                 string output = exec.RunCommand(Command);
                 RetPressEvent(80);
-                RetMessageEvent("Get Output Txt");
-                RetMessageEvent(output.Replace("\n", "\r\n"));
+                if (output.Length <= 0)
+                {
+                    RetMessageEvent("Not Return Txt");
+                }
+                else
+                {
+                    RetMessageEvent("Return ：");
+                    RetMessageEvent((output.Replace("\n", "\r\n")));
+                }
                 exec.Close();
                 RetMessageEvent("Exec Success !");
                 RetPressEvent(100);

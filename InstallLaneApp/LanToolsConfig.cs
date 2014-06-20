@@ -5,11 +5,8 @@ using System.Windows.Forms;
 using System.ComponentModel;
 using System.Xml;
 using System.Xml.Serialization;
-using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
-using System.Text;
 using System.Threading.Tasks;
 namespace InstallLaneApp
 {
@@ -128,11 +125,18 @@ namespace InstallLaneApp
             System.IO.File.WriteAllBytes(FileName, XMLRW<LanToolsConfig>.Write(As));
         }
         List<LaneCommand> _AppList = new List<LaneCommand>();
+
         public List<LaneCommand> CommandList
         {
             get { return _AppList; }
             set { _AppList = value; }
         }
+         List<ExecCommands> _Commands = new List<ExecCommands>();
+         public List<ExecCommands> Commands
+         {
+             get { return _Commands; }
+             set { _Commands = value; }
+         }
         int _EStartIP = 71;
         public int EStartIP
         {

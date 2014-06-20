@@ -80,6 +80,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Reader.cs" />
+    <Compile Include="SetLocalTime.cs" />
     <Compile Include="SFtptools.cs" />
     <Compile Include="SSh2Tools.cs" />
     <EmbeddedResource Include="ExecCommadFrm.resx">

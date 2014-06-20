@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Chilkat;
+
 using System.Windows.Forms;
 using Tamir.SharpSsh;
 namespace InstallLaneApp
@@ -28,8 +28,9 @@ namespace InstallLaneApp
         }
 
 
-        public  void SSHRSMC(string hostname,string UserName,string  Pwd,string Command)
+        public  string  SSHRSMC(string hostname,string UserName,string  Pwd,string Command)
         {
+            string ret = "";
             try
             {
                 RetPressEvent(10);
@@ -51,6 +52,7 @@ namespace InstallLaneApp
                 {
                     RetMessageEvent("Return ：");
                     RetMessageEvent((output.Replace("\n", "\r\n")));
+                    ret = output;
                 }
                 exec.Close();
                 RetMessageEvent("Exec Success !");
@@ -61,8 +63,44 @@ namespace InstallLaneApp
                 RetMessageEvent(ex.Message);
                 RetStateEnevt(false);
             }
+            return ret;
          
          }
+        public string SSHRSMC(string hostname, string UserName, string Pwd, string[] Command)
+        {
+            string ret = "";
+            try
+            {
+                RetPressEvent(5);
+            
+                SshExec exec = new SshExec(hostname, UserName);
+               
+                exec.Password = Pwd;              
+                exec.Connect();
+                RetPressEvent(10);             
+                string output  ;
+                double start = 10;
+                double fit =  88.0 / Command.Length;
+                for(int i=0 ;i<Command.Length ;i++)
+                {
+                    output = exec.RunCommand(Command[i]);                   
+                    start +=fit;
+                    RetPressEvent(Convert.ToInt16(start));
+                    RetMessageEvent("");
+                }                
+                RetPressEvent(98);               
+                exec.Close();                
+                RetPressEvent(100);
+            }
+            catch (System.Exception ex)
+            {
+              
+                RetStateEnevt(false);
+                MessageBox.Show(ex.Message);
+            }
+            return ret;
+
+        }
         //public  void SSHRSMC(string hostname,string UserName,string  Pwd,string Command)
         //{
         //    Chilkat.Ssh ssh = new Chilkat.Ssh();

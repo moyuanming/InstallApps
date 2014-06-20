@@ -9,8 +9,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>InstallLaneApp</RootNamespace>
     <AssemblyName>InstallLaneApp</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -79,8 +80,12 @@
     <Compile Include="LanToolsConfig.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Reader.cs" />
-    <Compile Include="SetLocalTime.cs" />
+    <Compile Include="ReTranData.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReTranData.Designer.cs">
+      <DependentUpon>ReTranData.cs</DependentUpon>
+    </Compile>
     <Compile Include="SFtptools.cs" />
     <Compile Include="SSh2Tools.cs" />
     <EmbeddedResource Include="ExecCommadFrm.resx">
@@ -100,7 +105,11 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="ReTranData.resx">
+      <DependentUpon>ReTranData.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

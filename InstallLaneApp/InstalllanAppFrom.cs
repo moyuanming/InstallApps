@@ -55,11 +55,12 @@ namespace InstallLaneApp
                 }
                 foreach (ExecCommands tmp in Lts.Commands)
                 {
-                    CbxRunCmd.Items.Add(tmp.Command);
+                    CbxRunCmd.Items.Add(tmp.CommandName);
 
                 }
 
                 CbxCommandList.SelectedIndex = 0;
+                CbxRunCmd.SelectedIndex = 0;
                 TxtXcount.Text = Lts.Xcount.ToString();
                 TxtEcount.Text = Lts.ECount.ToString();
                 TxtXStartIP.Text = Lts.XstartIP.ToString();
@@ -156,12 +157,12 @@ namespace InstallLaneApp
         {
             if (!CheckSinle.Checked)
             {
-                ExecCmd(CbxRunCmd.Text);
+                ExecCmd(TxtRunCommand.Text);
             }
             else
             {
-                ExecMultipleMachine(TxtIP.Text, Convert.ToInt32(TxtEStartIP.Text), Convert.ToInt32(TxtEcount.Text), 1, CbxRunCmd.Text);
-                ExecMultipleMachine(TxtIP.Text, Convert.ToInt32(TxtXStartIP.Text), Convert.ToInt32(TxtXcount.Text), 1, CbxRunCmd.Text);  
+                ExecMultipleMachine(TxtIP.Text, Convert.ToInt32(TxtEStartIP.Text), Convert.ToInt32(TxtEcount.Text), 1, TxtRunCommand.Text);
+                ExecMultipleMachine(TxtIP.Text, Convert.ToInt32(TxtXStartIP.Text), Convert.ToInt32(TxtXcount.Text), 1, TxtRunCommand.Text);  
             }
         }
         private void BtnConfig_Click(object sender, EventArgs e)
@@ -213,6 +214,17 @@ namespace InstallLaneApp
                 LabMessage.ForeColor = System.Drawing.Color.Red;
                
             }
+        }
+
+        private void BtnData_Click(object sender, EventArgs e)
+        {
+            ReTranData Frm = new ReTranData();
+            Frm.ShowDialog();
+        }
+
+        private void CbxRunCmd_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            TxtRunCommand.Text = Lts.Commands[CbxRunCmd.SelectedIndex].Command;
         }
     }
 }

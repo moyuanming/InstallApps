@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.label1 = new System.Windows.Forms.Label();
             this.TxtIP = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -60,8 +59,10 @@
             this.CheckSinle = new System.Windows.Forms.CheckBox();
             this.TxtIP4 = new System.Windows.Forms.TextBox();
             this.PbExec = new System.Windows.Forms.ProgressBar();
-            this.TmResfh = new System.Windows.Forms.Timer(this.components);
+            this.TmResfh = new System.Windows.Forms.Timer();
             this.LabMessage = new System.Windows.Forms.Label();
+            this.BtnData = new System.Windows.Forms.Button();
+            this.TxtRunCommand = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // label1
@@ -137,7 +138,7 @@
             // 
             // BtnClose
             // 
-            this.BtnClose.Location = new System.Drawing.Point(752, 571);
+            this.BtnClose.Location = new System.Drawing.Point(764, 571);
             this.BtnClose.Name = "BtnClose";
             this.BtnClose.Size = new System.Drawing.Size(75, 23);
             this.BtnClose.TabIndex = 2;
@@ -156,7 +157,7 @@
             // 
             // BtnConfig
             // 
-            this.BtnConfig.Location = new System.Drawing.Point(665, 571);
+            this.BtnConfig.Location = new System.Drawing.Point(596, 571);
             this.BtnConfig.Name = "BtnConfig";
             this.BtnConfig.Size = new System.Drawing.Size(75, 23);
             this.BtnConfig.TabIndex = 5;
@@ -203,7 +204,7 @@
             // 
             // BtnClearMsg
             // 
-            this.BtnClearMsg.Location = new System.Drawing.Point(578, 571);
+            this.BtnClearMsg.Location = new System.Drawing.Point(512, 571);
             this.BtnClearMsg.Name = "BtnClearMsg";
             this.BtnClearMsg.Size = new System.Drawing.Size(75, 23);
             this.BtnClearMsg.TabIndex = 9;
@@ -219,9 +220,10 @@
             "cat /EMRCV5/CONFIG/AppFunction.ini"});
             this.CbxRunCmd.Location = new System.Drawing.Point(127, 226);
             this.CbxRunCmd.Name = "CbxRunCmd";
-            this.CbxRunCmd.Size = new System.Drawing.Size(619, 20);
+            this.CbxRunCmd.Size = new System.Drawing.Size(257, 20);
             this.CbxRunCmd.TabIndex = 6;
             this.CbxRunCmd.Text = "Monitor";
+            this.CbxRunCmd.SelectedIndexChanged += new System.EventHandler(this.CbxRunCmd_SelectedIndexChanged);
             // 
             // label5
             // 
@@ -359,15 +361,34 @@
             this.LabMessage.ForeColor = System.Drawing.Color.Cyan;
             this.LabMessage.Location = new System.Drawing.Point(121, 561);
             this.LabMessage.Name = "LabMessage";
-            this.LabMessage.Size = new System.Drawing.Size(445, 33);
+            this.LabMessage.Size = new System.Drawing.Size(330, 33);
             this.LabMessage.TabIndex = 22;
             this.LabMessage.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // BtnData
+            // 
+            this.BtnData.Location = new System.Drawing.Point(680, 571);
+            this.BtnData.Name = "BtnData";
+            this.BtnData.Size = new System.Drawing.Size(75, 23);
+            this.BtnData.TabIndex = 23;
+            this.BtnData.Text = "&Lane Data";
+            this.BtnData.UseVisualStyleBackColor = true;
+            this.BtnData.Click += new System.EventHandler(this.BtnData_Click);
+            // 
+            // TxtRunCommand
+            // 
+            this.TxtRunCommand.Location = new System.Drawing.Point(390, 225);
+            this.TxtRunCommand.Name = "TxtRunCommand";
+            this.TxtRunCommand.Size = new System.Drawing.Size(356, 21);
+            this.TxtRunCommand.TabIndex = 1;
+            this.TxtRunCommand.Text = "51";
             // 
             // InstalllanAppFrom
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(851, 601);
+            this.Controls.Add(this.BtnData);
             this.Controls.Add(this.LabMessage);
             this.Controls.Add(this.PbExec);
             this.Controls.Add(this.CheckSinle);
@@ -389,6 +410,7 @@
             this.Controls.Add(this.TxtUserName);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
+            this.Controls.Add(this.TxtRunCommand);
             this.Controls.Add(this.TxtIP4);
             this.Controls.Add(this.TxtXcount);
             this.Controls.Add(this.TxtEcount);
@@ -400,7 +422,12 @@
             this.Controls.Add(this.label7);
             this.Controls.Add(this.TxtIP);
             this.Controls.Add(this.label1);
+            this.MaximumSize = new System.Drawing.Size(867, 640);
+            this.MinimizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(867, 640);
             this.Name = "InstalllanAppFrom";
+            this.RightToLeftLayout = true;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "InstalllanAppFrom";
             this.Load += new System.EventHandler(this.InstalllanAppFrom_Load);
             this.ResumeLayout(false);
@@ -443,5 +470,7 @@
         private System.Windows.Forms.ProgressBar PbExec;
         private System.Windows.Forms.Timer TmResfh;
         private System.Windows.Forms.Label LabMessage;
+        private System.Windows.Forms.Button BtnData;
+        private System.Windows.Forms.TextBox TxtRunCommand;
     }
 }

@@ -5,11 +5,10 @@ using System.Windows.Forms;
 using System.ComponentModel;
 using System.Xml;
 using System.Xml.Serialization;
-using System;
-using System.Collections.Generic;
+
 using System.IO;
 using System.Reflection;
-using System.Text;
+
 using System.Threading.Tasks;
 
 namespace InstallLaneApp
@@ -27,6 +26,12 @@ namespace InstallLaneApp
     [Serializable]
     public class ExecCommands
     {
+        string _commandName = "";
+        public string CommandName
+        {
+            get { return _commandName; }
+            set { _commandName = value; }
+        }
         string _Command;
         public string Command
         {

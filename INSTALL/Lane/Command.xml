@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<LanToolsConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<LanToolsConfig xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <CommandList>
     <LaneCommand>
       <Name>初始化车道程序</Name>
@@ -24,16 +24,32 @@
   </CommandList>
   <Commands>
     <ExecCommands>
+      <CommandName>查看程序目录</CommandName>
       <Command>ls /EMRCV5/</Command>
     </ExecCommands>
     <ExecCommands>
+      <CommandName>查看车道程序功能开关</CommandName>
       <Command> cat /EMRCV5/CONFIG/AppFunction.ini</Command>
     </ExecCommands>
     <ExecCommands>
+      <CommandName>查看车道通讯配置</CommandName>
       <Command>cat /EMRCV5/CONFIG/CommunctionConfig.ini</Command>
     </ExecCommands>
     <ExecCommands>
+      <CommandName>查看车道配置文件</CommandName>
       <Command>cat /EMRCV5/CONFIG/Config.ini</Command>
+    </ExecCommands>
+    <ExecCommands>
+      <CommandName>查看车道IP详细信息</CommandName>
+      <Command>ifconfig</Command>
+    </ExecCommands>
+    <ExecCommands>
+      <CommandName>查看车道启动项文件</CommandName>
+      <Command>cat /etc/rc.local </Command>
+    </ExecCommands>
+    <ExecCommands>
+      <CommandName>查看车道软件重启日志</CommandName>
+      <Command>cat /EMRCV5/BIN/CurrentVer </Command>
     </ExecCommands>
   </Commands>
   <EStartIP>71</EStartIP>

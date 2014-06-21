@@ -1,10 +1,36 @@
 <?xml version="1.0"?>
 <InstallItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <SvnUserName>mym</SvnUserName>
+  <SvnPwd>future</SvnPwd>
   <AppList>
     <App>
+      <AppName>实时监控</AppName>
+      <ICOName>Monitor.ico</ICOName>
+      <ExecName>TCS.Watcher.exe</ExecName>
+      <SvnPath>RHYSOFT</SvnPath>
+    </App>
+    <App>
+      <AppName>图片查询</AppName>
+      <ICOName>Image.ico</ICOName>
+      <ExecName>全封闭收费站图片查询系统.exe</ExecName>
+      <SvnPath>REPORT</SvnPath>
+    </App>
+    <App>
+      <AppName>报表管理</AppName>
+      <ICOName>Report.ico</ICOName>
+      <ExecName>全封闭收费收费站报表管理系统.exe</ExecName>
+      <SvnPath>REPORT</SvnPath>
+    </App>
+    <App>
+      <AppName>卡管理</AppName>
+      <ICOName>CCM.ico</ICOName>
+      <ExecName>全封闭收费站卡管理系统.exe</ExecName>
+      <SvnPath>REPORT</SvnPath>
+    </App>
+    <App>
       <AppName>参数管理</AppName>
-      <ICOName>11</ICOName>
-      <ExecName>全封闭(分)中心参数管理系统.exe</ExecName>
+      <ICOName>PTM.ico</ICOName>
+      <ExecName>全封闭收费站参数管理系统.exe</ExecName>
       <SvnPath>REPORT</SvnPath>
     </App>
   </AppList>

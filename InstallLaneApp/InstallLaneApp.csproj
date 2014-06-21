@@ -36,9 +36,6 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ChilkatDotNet45">
-      <HintPath>..\INSTALL\Lane\ChilkatDotNet45.dll</HintPath>
-    </Reference>
     <Reference Include="Routrek.granados">
       <HintPath>E:\granados200\bin\Routrek.granados.dll</HintPath>
     </Reference>
@@ -55,6 +52,9 @@
     <Reference Include="Tamir.SharpSSH, Version=1.1.1.13, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\INSTALL\Lane\Tamir.SharpSSH.dll</HintPath>
+    </Reference>
+    <Reference Include="TCS.Config">
+      <HintPath>..\..\TollSystem2\TollSystem\trunk\src\PlazaAllClosed\App\全封闭报表\BIN\TCS.Config.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

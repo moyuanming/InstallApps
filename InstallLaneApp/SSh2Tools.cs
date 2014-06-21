@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 using System.Windows.Forms;
 using Tamir.SharpSsh;
+using TCS;
 namespace InstallLaneApp
 {
     class SSh2Tools
@@ -27,7 +28,13 @@ namespace InstallLaneApp
             return result;
         }
 
-
+        void ExecLog( string format, params object[] args)
+        {
+            string text =string.Format(format, args);
+            Console.WriteLine(text);
+            string path =  "log.txt";
+            System.IO.File.AppendAllText(path, text + System.Environment.NewLine);
+        }
         public  string  SSHRSMC(string hostname,string UserName,string  Pwd,string Command)
         {
             string ret = "";
@@ -40,7 +47,19 @@ namespace InstallLaneApp
                 exec.Connect();
                 RetPressEvent(50);
                 string Space = "                                                                                       ";
-                RetMessageEvent(string.Format("[{0}@{1}]#{2}{3}{4}", UserName, hostname, Command, Space.Substring(UserName.Length + UserName.Length + Command.Length + 4, Space.Length - (UserName.Length + UserName.Length + Command.Length + 4 + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss").Length)), DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")));
+                string MsgEventstr = "";
+                if (Command.Length > 50)
+                {
+                    MsgEventstr = string.Format("[{0}@{1}]#{2}", UserName, hostname, Command);
+                    RetMessageEvent(MsgEventstr);
+                    ExecLog(MsgEventstr);
+                }
+                else
+                {
+                    MsgEventstr = (string.Format("[{0}@{1}]#{2}{3}{4}", UserName, hostname, Command, Space.Substring(UserName.Length + UserName.Length + Command.Length + 4, Space.Length - (UserName.Length + UserName.Length + Command.Length + 4 + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss").Length)), DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")));
+                     RetMessageEvent(MsgEventstr);
+                    ExecLog(MsgEventstr);
+                }
                 string output = exec.RunCommand(Command);
                 RetPressEvent(80);
                  if (output.Length <= 0)
@@ -50,14 +69,16 @@ namespace InstallLaneApp
                 else
                 {
 
-                    RetMessageEvent("\r\n  " + (output.Replace("\n", "\r\n  ")));
-                  
+                    MsgEventstr = ("\r\n  " + (output.Replace("\n", "\r\n  ")));
+                    RetMessageEvent(MsgEventstr);
+                    ExecLog(MsgEventstr);
                     ret = output;
                 }
                 exec.Close();
                 Command = "";
-                RetMessageEvent(string.Format("[{0}@{1}]#{2}{3}{4}", UserName, hostname, Command, Space.Substring(UserName.Length + UserName.Length + Command.Length + 4, Space.Length - (UserName.Length + UserName.Length + Command.Length + 4 + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss").Length)), DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")));
-                
+                MsgEventstr = (string.Format("[{0}@{1}]#{2}{3}{4}", UserName, hostname, Command, Space.Substring(UserName.Length + UserName.Length + Command.Length + 4, Space.Length - (UserName.Length + UserName.Length + Command.Length + 4 + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss").Length)), DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")));
+                 RetMessageEvent(MsgEventstr);
+                    ExecLog(MsgEventstr);
                 RetPressEvent(100);
             }
             catch (System.Exception ex)

@@ -143,12 +143,14 @@ namespace InstallLaneApp
             if (!CheckSinle.Checked)
             {
                 LabMessage.Text = "Please Wait ……!";
+                RetMsg = "";
                 LabMessage.ForeColor = System.Drawing.Color.Cyan;
                 Thread Th = new Thread(RunCommand);
                 Th.Start();
             }
             else
             {
+                
                 ExecMultipleMachine(TxtIP.Text, Convert.ToInt32(TxtEStartIP.Text), Convert.ToInt32(TxtEcount.Text),0,"");
                 ExecMultipleMachine(TxtIP.Text, Convert.ToInt32(TxtXStartIP.Text), Convert.ToInt32(TxtXcount.Text),0,"");              
             }   
@@ -157,10 +159,12 @@ namespace InstallLaneApp
         {
             if (!CheckSinle.Checked)
             {
+                RetMsg = "";
                 ExecCmd(TxtRunCommand.Text);
             }
             else
             {
+               // RetMsg = ""; 
                 ExecMultipleMachine(TxtIP.Text, Convert.ToInt32(TxtEStartIP.Text), Convert.ToInt32(TxtEcount.Text), 1, TxtRunCommand.Text);
                 ExecMultipleMachine(TxtIP.Text, Convert.ToInt32(TxtXStartIP.Text), Convert.ToInt32(TxtXcount.Text), 1, TxtRunCommand.Text);  
             }
@@ -225,6 +229,16 @@ namespace InstallLaneApp
         private void CbxRunCmd_SelectedIndexChanged(object sender, EventArgs e)
         {
             TxtRunCommand.Text = Lts.Commands[CbxRunCmd.SelectedIndex].Command;
+        }
+
+        private void TxtRunCommand_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == 13)
+            {
+                RetMsg = "";
+                ExecCmd(TxtRunCommand.Text);
+                TxtRunCommand.Text = "";
+            }
         }
     }
 }

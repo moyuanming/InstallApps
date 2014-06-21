@@ -148,6 +148,9 @@
             // 
             // TxtRet
             // 
+            this.TxtRet.BackColor = System.Drawing.SystemColors.Window;
+            this.TxtRet.Font = new System.Drawing.Font("宋体", 10F);
+            this.TxtRet.ForeColor = System.Drawing.SystemColors.WindowText;
             this.TxtRet.Location = new System.Drawing.Point(127, 259);
             this.TxtRet.Multiline = true;
             this.TxtRet.Name = "TxtRet";
@@ -382,6 +385,7 @@
             this.TxtRunCommand.Size = new System.Drawing.Size(356, 21);
             this.TxtRunCommand.TabIndex = 1;
             this.TxtRunCommand.Text = "51";
+            this.TxtRunCommand.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxtRunCommand_KeyPress);
             // 
             // InstalllanAppFrom
             // 

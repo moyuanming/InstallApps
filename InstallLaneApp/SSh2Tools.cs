@@ -33,29 +33,31 @@ namespace InstallLaneApp
             string ret = "";
             try
             {
-                RetPressEvent(10);
-                RetMessageEvent("New Ssh Exec ");
+                RetPressEvent(10);              
                 SshExec exec = new SshExec(hostname, UserName);
                 RetPressEvent(30);
-                exec.Password = Pwd;
-                RetMessageEvent("SSh  Connecting ");
+                exec.Password = Pwd;                
                 exec.Connect();
                 RetPressEvent(50);
-                RetMessageEvent("Run Command: " + Command);
+                string Space = "                                                                                       ";
+                RetMessageEvent(string.Format("[{0}@{1}]#{2}{3}{4}", UserName, hostname, Command, Space.Substring(UserName.Length + UserName.Length + Command.Length + 4, Space.Length - (UserName.Length + UserName.Length + Command.Length + 4 + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss").Length)), DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")));
                 string output = exec.RunCommand(Command);
                 RetPressEvent(80);
-                if (output.Length <= 0)
+                 if (output.Length <= 0)
                 {
-                    RetMessageEvent("Not Return Txt");
+                   
                 }
                 else
                 {
-                    RetMessageEvent("Return ：");
-                    RetMessageEvent((output.Replace("\n", "\r\n")));
+
+                    RetMessageEvent("\r\n  " + (output.Replace("\n", "\r\n  ")));
+                  
                     ret = output;
                 }
                 exec.Close();
-                RetMessageEvent("Exec Success !");
+                Command = "";
+                RetMessageEvent(string.Format("[{0}@{1}]#{2}{3}{4}", UserName, hostname, Command, Space.Substring(UserName.Length + UserName.Length + Command.Length + 4, Space.Length - (UserName.Length + UserName.Length + Command.Length + 4 + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss").Length)), DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")));
+                
                 RetPressEvent(100);
             }
             catch (System.Exception ex)

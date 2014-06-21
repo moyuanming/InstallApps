@@ -51,6 +51,26 @@
       <CommandName>查看车道软件重启日志</CommandName>
       <Command>cat /EMRCV5/BIN/CurrentVer </Command>
     </ExecCommands>
+    <ExecCommands>
+      <CommandName>关闭车道软件</CommandName>
+      <Command>killall emrc_main</Command>
+    </ExecCommands>
+    <ExecCommands>
+      <CommandName>重启车道机</CommandName>
+      <Command>root</Command>
+    </ExecCommands>
+    <ExecCommands>
+      <CommandName>查看车道磁盘使用情况</CommandName>
+      <Command>df -h</Command>
+    </ExecCommands>
+    <ExecCommands>
+      <CommandName>查看车道程序使用空间</CommandName>
+      <Command>du /EMRCV5/* -sh</Command>
+    </ExecCommands>
+    <ExecCommands>
+      <CommandName>查看车道数据库大小</CommandName>
+      <Command> ls /EMRCV5/DATA/EMRC_MSG_DB  -lh</Command>
+    </ExecCommands>
   </Commands>
   <EStartIP>71</EStartIP>
   <XstartIP>51</XstartIP>

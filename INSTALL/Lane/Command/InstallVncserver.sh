@@ -1,12 +1,12 @@
 echo "install vncserver"
-cp vncserver /usr/bin/
-cp libvncserver.so.0 /lib/
+cp /mnt/vncserver /usr/bin/
+cp /mnt/libvncserver.so.0 /lib/
 echo "cp rcloacl to etc "
 
 
 
-rm /etc/rc.local 
-ln /mnt/rc.local /etc/rc.local
+#rm /etc/rc.local 
+cp /mnt/rc.local /etc/rc.local
 
 
 echo "end"

@@ -75,7 +75,7 @@
     </ExecCommands>
     <ExecCommands>
       <CommandName>重启车道机</CommandName>
-      <Command>root</Command>
+      <Command>reboot</Command>
     </ExecCommands>
     <ExecCommands>
       <CommandName>查看车道磁盘使用情况</CommandName>

@@ -2,16 +2,14 @@
 
 df|grep -q /dev/SDHC
 if [ $? -eq 0 ]; then
-	#SD卡已经挂载 到 /SDHC
+	#Mount SD Card to  /SDHC
 	echo "Have SD!"
 fi
 
 cd /lighttpd/sbin/
 ./arm-unknown-linux-gnueabi-lighttpd -f ../config/lighttpd.conf 
-
 cd /EMRCV5/BIN/
 chmod 777 /EMRCV5/BIN/* 
-vncserver &
 ./Run.sh & 
 
 

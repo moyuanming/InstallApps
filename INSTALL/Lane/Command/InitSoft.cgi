@@ -1,10 +1,10 @@
 #! /bin/sh
-./HtmWriteHead 
+
 rm /EMRCV5 -rf
 IP=$(ifconfig -a|grep inet|grep -v 127.0.0.1|grep -v 182.168.70.88|grep -v inet6|awk '{if(NR==1)print $2}'|tr -d "addr:")
 Lane=$(echo $IP | awk -F "." '{print $4}')
 Plaza=$(echo $IP | awk -F "." '{print 0$2 $3 }') 
-PARAMIP=$(echo $IP | awk -F "." '{print $1"."$2"."$3".5"}')
+PARAMIP=$(echo $IP | awk -F "." '{print $1"."$2"."$3".1"}')
 echo "Last IP:"$Lane"<br>"
 echo "Exec Svn Co"
 echo "" >> log
@@ -16,4 +16,4 @@ cd /EMRCV5
 chmod +x BIN/*
 cp /EMRCV5/rc.local /etc/rc.local
 chmod +x /etc/rc.local
-echo "</p>"
+

@@ -21,6 +21,24 @@
         </UploadFile>
       </UploadFileList>
     </LaneCommand>
+    <LaneCommand>
+      <Name>车道添vncsever</Name>
+      <ExecFileName>InstallVncserver.sh</ExecFileName>
+      <UploadFileList>
+        <UploadFile>
+          <FilePath>InstallVncserver.sh</FilePath>
+        </UploadFile>
+        <UploadFile>
+          <FilePath>vncserver</FilePath>
+        </UploadFile>
+        <UploadFile>
+          <FilePath>libvncserver.so.0</FilePath>
+        </UploadFile>
+        <UploadFile>
+          <FilePath>rc.local</FilePath>
+        </UploadFile>
+      </UploadFileList>
+    </LaneCommand>
   </CommandList>
   <Commands>
     <ExecCommands>

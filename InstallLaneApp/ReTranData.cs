@@ -133,7 +133,7 @@ namespace InstallLaneApp
             ssh.RetMessageEvent += ssh_RetMessageEvent;
             ssh.RetPressEvent +=ssh_RetPressEvent;
             ssh.RetStateEnevt +=ssh_RetStateEnevt;
-            string DataStr = ssh.SSHRSMC(TxtIP.Text, TxtUserName.Text, TxtPwd.Text, Cmd);
+            string DataStr = ssh.ExecCommand(TxtIP.Text, TxtUserName.Text, TxtPwd.Text, Cmd);
             string[] DataArry = StringSplit(DataStr, "\n");
             lock (mux)
             {
@@ -148,7 +148,16 @@ namespace InstallLaneApp
                 {
                     foreach (string Tmp in DataArry)
                     {
-                        Dt.Rows.Add(StringSplit(Tmp, "|"));
+                        try
+                        {
+                            Dt.Rows.Add(StringSplit(Tmp, "|"));
+                        }
+                        catch (System.Exception ex)
+                        {
+
+                        }
+
+                        
                     }
                 }
             }
@@ -195,7 +204,7 @@ namespace InstallLaneApp
             ssh.RetPressEvent += ssh_RetPressEvent;
             ssh.RetStateEnevt += ssh_RetStateEnevt;
       
-            string DataStr = ssh.SSHRSMC(TxtIP.Text, TxtUserName.Text, TxtPwd.Text, Commands);
+            string DataStr = ssh.ExecCommand(TxtIP.Text, TxtUserName.Text, TxtPwd.Text, Commands);
         
           
         }

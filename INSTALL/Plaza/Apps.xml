@@ -1,37 +1,80 @@
 <?xml version="1.0"?>
-<InstallItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<InstallItem xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <SvnUserName>mym</SvnUserName>
   <SvnPwd>future</SvnPwd>
   <AppList>
     <App>
-      <AppName>实时监控</AppName>
+      <AppName>收费站实时监控</AppName>
       <ICOName>Monitor.ico</ICOName>
       <ExecName>TCS.Watcher.exe</ExecName>
+      <ShortcutName>实时监控</ShortcutName>
       <SvnPath>RHYSOFT</SvnPath>
     </App>
     <App>
-      <AppName>图片查询</AppName>
+      <AppName>收费站图片查询</AppName>
       <ICOName>Image.ico</ICOName>
       <ExecName>全封闭收费站图片查询系统.exe</ExecName>
+      <ShortcutName>图片查询</ShortcutName>
       <SvnPath>REPORT</SvnPath>
     </App>
     <App>
-      <AppName>报表管理</AppName>
+      <AppName>收费站报表管理</AppName>
       <ICOName>Report.ico</ICOName>
       <ExecName>全封闭收费收费站报表管理系统.exe</ExecName>
+      <ShortcutName>报表管理</ShortcutName>
       <SvnPath>REPORT</SvnPath>
     </App>
     <App>
-      <AppName>卡管理</AppName>
+      <AppName>收费站卡管理</AppName>
       <ICOName>CCM.ico</ICOName>
       <ExecName>全封闭收费站卡管理系统.exe</ExecName>
+      <ShortcutName>卡管理</ShortcutName>
       <SvnPath>REPORT</SvnPath>
     </App>
     <App>
-      <AppName>参数管理</AppName>
+      <AppName>收费站参数管理</AppName>
       <ICOName>PTM.ico</ICOName>
       <ExecName>全封闭收费站参数管理系统.exe</ExecName>
+      <ShortcutName>参数管理</ShortcutName>
+      <SvnPath>REPORT</SvnPath>
+    </App>
+    <App>
+      <AppName>全封闭(分)中心参数管理系统</AppName>
+      <ICOName>PTM.ico</ICOName>
+      <ExecName>全封闭(分)中心参数管理系统.exe</ExecName>
+      <ShortcutName>参数管理</ShortcutName>
+      <SvnPath>REPORT</SvnPath>
+    </App>
+    <App>
+      <AppName>分中心图片查询</AppName>
+      <ICOName>Image.ico</ICOName>
+      <ExecName>全封闭(分)中心图片查询系统.exe</ExecName>
+      <ShortcutName>图片查询</ShortcutName>
+      <SvnPath>REPORT</SvnPath>
+    </App>
+    <App>
+      <AppName>分中心报表管理系统</AppName>
+      <ICOName>Report.ico</ICOName>
+      <ExecName>全封闭收费(分)中心报表管理系统.exe</ExecName>
+      <ShortcutName>报表管理</ShortcutName>
+      <SvnPath>REPORT</SvnPath>
+    </App>
+    <App>
+      <AppName>分中心卡管理</AppName>
+      <ICOName>CCM.ico</ICOName>
+      <ExecName>全封闭收费(分)中心卡管理系统.exe</ExecName>
+      <ShortcutName>卡管理</ShortcutName>
       <SvnPath>REPORT</SvnPath>
     </App>
   </AppList>
+  <Commands>
+    <ExecCommands>
+      <CommandName>更新服务器</CommandName>
+      <Command>D:\RHYSOFT\BOSS\系统必备\updatetollsvr.cmd</Command>
+    </ExecCommands>
+    <ExecCommands>
+      <CommandName>在服务器上创建收费服务</CommandName>
+      <Command>D:\RHYSOFT\BOSS\系统必备\buildtollsvr.cmd</Command>
+    </ExecCommands>
+  </Commands>
 </InstallItem>

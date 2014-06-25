@@ -58,7 +58,6 @@ namespace InstallLaneApp
                     CbxRunCmd.Items.Add(tmp.CommandName);
 
                 }
-
                 CbxCommandList.SelectedIndex = 0;
                 CbxRunCmd.SelectedIndex = 0;
                 TxtXcount.Text = Lts.Xcount.ToString();
@@ -99,12 +98,20 @@ namespace InstallLaneApp
         }
         void ExecCmd(string CmdString)
         {
-            SSh2Tools SSh = new SSh2Tools();
-            SSh.RetMessageEvent += SSh_RetMessageEvent;
-            SSh.RetPressEvent += SSh_RetPressEvent;
-            SSh.RetStateEnevt += SSh_RetStateEnevt;
+            ECToolsInterface ECServer; ;
+            if (RbSSH2.Checked)
+            {
+                ECServer = new SSh2Tools();
+            }
+            else
+            {
+                ECServer = new TelentTools();
+            }
+            ECServer.RetMessageEvent += SSh_RetMessageEvent;
+            ECServer.RetPressEvent += SSh_RetPressEvent;
+            ECServer.RetStateEnevt += SSh_RetStateEnevt;
             string IP = string.Format("{0}{1}", TxtIP.Text,TxtIP4.Text);
-            SSh.SSHRSMC(IP, TxtUserName.Text, TxtPwd.Text, CmdString);
+            ECServer.ExecCommand(IP, TxtUserName.Text, TxtPwd.Text, CmdString);
          
         }
         
@@ -239,6 +246,11 @@ namespace InstallLaneApp
                 ExecCmd(TxtRunCommand.Text);
                 TxtRunCommand.Text = "";
             }
+        }
+
+        private void BtnPut_Click(object sender, EventArgs e)
+        {
+            SFtptools.SftpUpload(TxtIP.Text+TxtIP4.Text, TxtUserName.Text, TxtPwd.Text, TxtFrom.Text, TxtTo.Text);
         }
     }
 }

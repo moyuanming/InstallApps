@@ -77,13 +77,13 @@ namespace InstallLaneApp
                     {
                         SFtptools.SftpUpload(IP, UserName, Pwd, string.Format(@"Command\{0}", tmp.FilePath), string.Format(@"/mnt/{0}", tmp.FilePath));
                     }
-                    SShTools.SSHRSMC(IP, UserName, Pwd, string.Format(@"chmod +x /mnt/ -R ", MyCommand.ExecFileName));
-                    SShTools.SSHRSMC(IP, UserName, Pwd, string.Format(@"/mnt/{0}", MyCommand.ExecFileName));
+                    SShTools.ExecCommand(IP, UserName, Pwd, string.Format(@"chmod +x /mnt/ -R ", MyCommand.ExecFileName));
+                    SShTools.ExecCommand(IP, UserName, Pwd, string.Format(@"/mnt/{0}", MyCommand.ExecFileName));
                 }
             }
             else
             {
-                SShTools.SSHRSMC(IP, UserName, Pwd, CommandString);
+                SShTools.ExecCommand(IP, UserName, Pwd, CommandString);
             }
         }
         bool ret = true;

@@ -24,9 +24,27 @@ namespace InstallLaneApp
             }
             return "Success.";
         }
-    
 
-      
+
+        public static string SftpDownload(string hostname, string UserName, string Pwd, string localFilePath, string remoteFilePath)
+        {
+            try
+            {
+
+                SshTransferProtocolBase sshCp;
+                sshCp = new Sftp(hostname, UserName);
+                sshCp.Password = Pwd;
+                sshCp.Connect();
+                sshCp.Get(remoteFilePath,localFilePath);
+                sshCp.Close();
+
+            }
+            catch (Exception e)
+            {
+                return e.Message;
+            }
+            return "Success.";
+        }
 
         
     }

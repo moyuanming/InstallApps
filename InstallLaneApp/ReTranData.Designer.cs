@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.DgView = new System.Windows.Forms.DataGridView();
             this.BtnReUpLoad = new System.Windows.Forms.Button();
             this.LabTitle = new System.Windows.Forms.Label();
@@ -57,7 +58,7 @@
             this.label12 = new System.Windows.Forms.Label();
             this.TxtWhere = new System.Windows.Forms.TextBox();
             this.PbExec = new System.Windows.Forms.ProgressBar();
-            this.TmResfh = new System.Windows.Forms.Timer();
+            this.TmResfh = new System.Windows.Forms.Timer(this.components);
             this.label13 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.DgView)).BeginInit();
@@ -65,6 +66,7 @@
             // 
             // DgView
             // 
+            this.DgView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.DgView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DgView.Location = new System.Drawing.Point(93, 230);
             this.DgView.Name = "DgView";

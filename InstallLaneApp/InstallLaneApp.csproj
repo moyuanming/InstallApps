@@ -58,6 +58,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ECToolsInterface.cs" />
     <Compile Include="ExecCommadFrm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -88,6 +89,9 @@
     </Compile>
     <Compile Include="SFtptools.cs" />
     <Compile Include="SSh2Tools.cs" />
+    <Compile Include="TelentTools.cs" />
+    <Compile Include="Terminal.cs" />
+    <Compile Include="VirtualScreen.cs" />
     <EmbeddedResource Include="ExecCommadFrm.resx">
       <DependentUpon>ExecCommadFrm.cs</DependentUpon>
     </EmbeddedResource>

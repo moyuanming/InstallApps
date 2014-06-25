@@ -130,6 +130,13 @@ namespace InstallApp
              get { return _ExecName; }
              set { _ExecName = value; }
          }
+         string _ShortcutName;
+         public string ShortcutName
+         {
+             get { return _ShortcutName; }
+             set { _ShortcutName = value; }
+         }
+      
          string _SvnPath;
          public string SvnPath
          {
@@ -137,7 +144,23 @@ namespace InstallApp
              set { _SvnPath = value; }
          }
     }
+     [Serializable]
+     public class ExecCommands
+     {
+         string _commandName = "";
+         public string CommandName
+         {
+             get { return _commandName; }
+             set { _commandName = value; }
+         }
+         string _Command;
+         public string Command
+         {
+             get { return _Command; }
+             set { _Command = value; }
+         }
 
+     }
     [Serializable]
     public class InstallItem
     {
@@ -175,6 +198,12 @@ namespace InstallApp
         {
             get { return _AppList; }
             set { _AppList = value; }
+        }
+        List<ExecCommands> _Commands = new List<ExecCommands>();
+        public List<ExecCommands> Commands
+        {
+            get { return _Commands; }
+            set { _Commands = value; }
         }
     }
 

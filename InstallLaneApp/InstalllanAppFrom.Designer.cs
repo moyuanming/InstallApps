@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.label1 = new System.Windows.Forms.Label();
             this.TxtIP = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -59,10 +60,18 @@
             this.CheckSinle = new System.Windows.Forms.CheckBox();
             this.TxtIP4 = new System.Windows.Forms.TextBox();
             this.PbExec = new System.Windows.Forms.ProgressBar();
-            this.TmResfh = new System.Windows.Forms.Timer();
+            this.TmResfh = new System.Windows.Forms.Timer(this.components);
             this.LabMessage = new System.Windows.Forms.Label();
             this.BtnData = new System.Windows.Forms.Button();
             this.TxtRunCommand = new System.Windows.Forms.TextBox();
+            this.TxtTo = new System.Windows.Forms.TextBox();
+            this.TxtFrom = new System.Windows.Forms.TextBox();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.BtnPut = new System.Windows.Forms.Button();
+            this.label15 = new System.Windows.Forms.Label();
+            this.RbSSH2 = new System.Windows.Forms.RadioButton();
+            this.RBTelnet = new System.Windows.Forms.RadioButton();
             this.SuspendLayout();
             // 
             // label1
@@ -151,11 +160,11 @@
             this.TxtRet.BackColor = System.Drawing.SystemColors.Window;
             this.TxtRet.Font = new System.Drawing.Font("宋体", 10F);
             this.TxtRet.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.TxtRet.Location = new System.Drawing.Point(127, 259);
+            this.TxtRet.Location = new System.Drawing.Point(127, 279);
             this.TxtRet.Multiline = true;
             this.TxtRet.Name = "TxtRet";
             this.TxtRet.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.TxtRet.Size = new System.Drawing.Size(701, 259);
+            this.TxtRet.Size = new System.Drawing.Size(701, 239);
             this.TxtRet.TabIndex = 1;
             // 
             // BtnConfig
@@ -199,7 +208,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(68, 258);
+            this.label8.Location = new System.Drawing.Point(68, 301);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(47, 12);
             this.label8.TabIndex = 8;
@@ -387,11 +396,91 @@
             this.TxtRunCommand.Text = "51";
             this.TxtRunCommand.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxtRunCommand_KeyPress);
             // 
+            // TxtTo
+            // 
+            this.TxtTo.Location = new System.Drawing.Point(430, 251);
+            this.TxtTo.Name = "TxtTo";
+            this.TxtTo.Size = new System.Drawing.Size(316, 21);
+            this.TxtTo.TabIndex = 1;
+            this.TxtTo.Text = "/EMRCV5/CONFIG/AppFunction.ini";
+            this.TxtTo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxtRunCommand_KeyPress);
+            // 
+            // TxtFrom
+            // 
+            this.TxtFrom.Location = new System.Drawing.Point(127, 251);
+            this.TxtFrom.Name = "TxtFrom";
+            this.TxtFrom.Size = new System.Drawing.Size(257, 21);
+            this.TxtFrom.TabIndex = 1;
+            this.TxtFrom.Text = "Command\\\\AppFunction.ini";
+            this.TxtFrom.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxtRunCommand_KeyPress);
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(79, 255);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(35, 12);
+            this.label13.TabIndex = 0;
+            this.label13.Text = "From:";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(395, 255);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(23, 12);
+            this.label14.TabIndex = 0;
+            this.label14.Text = "To:";
+            // 
+            // BtnPut
+            // 
+            this.BtnPut.Location = new System.Drawing.Point(753, 251);
+            this.BtnPut.Name = "BtnPut";
+            this.BtnPut.Size = new System.Drawing.Size(75, 23);
+            this.BtnPut.TabIndex = 24;
+            this.BtnPut.Text = "Put";
+            this.BtnPut.UseVisualStyleBackColor = true;
+            this.BtnPut.Click += new System.EventHandler(this.BtnPut_Click);
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(79, 104);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(35, 12);
+            this.label15.TabIndex = 0;
+            this.label15.Text = "Type:";
+            // 
+            // RbSSH2
+            // 
+            this.RbSSH2.AutoSize = true;
+            this.RbSSH2.Checked = true;
+            this.RbSSH2.Location = new System.Drawing.Point(127, 106);
+            this.RbSSH2.Name = "RbSSH2";
+            this.RbSSH2.Size = new System.Drawing.Size(47, 16);
+            this.RbSSH2.TabIndex = 25;
+            this.RbSSH2.TabStop = true;
+            this.RbSSH2.Text = "SSH2";
+            this.RbSSH2.UseVisualStyleBackColor = true;
+            // 
+            // RBTelnet
+            // 
+            this.RBTelnet.AutoSize = true;
+            this.RBTelnet.Location = new System.Drawing.Point(261, 106);
+            this.RBTelnet.Name = "RBTelnet";
+            this.RBTelnet.Size = new System.Drawing.Size(59, 16);
+            this.RBTelnet.TabIndex = 25;
+            this.RBTelnet.Text = "Telnet";
+            this.RBTelnet.UseVisualStyleBackColor = true;
+            // 
             // InstalllanAppFrom
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(851, 601);
+            this.Controls.Add(this.RBTelnet);
+            this.Controls.Add(this.RbSSH2);
+            this.Controls.Add(this.BtnPut);
             this.Controls.Add(this.BtnData);
             this.Controls.Add(this.LabMessage);
             this.Controls.Add(this.PbExec);
@@ -409,10 +498,14 @@
             this.Controls.Add(this.BtnExec);
             this.Controls.Add(this.TxtRet);
             this.Controls.Add(this.TxtPwd);
+            this.Controls.Add(this.label14);
+            this.Controls.Add(this.label13);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.cmd);
             this.Controls.Add(this.TxtUserName);
             this.Controls.Add(this.label3);
+            this.Controls.Add(this.TxtFrom);
+            this.Controls.Add(this.TxtTo);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.TxtRunCommand);
             this.Controls.Add(this.TxtIP4);
@@ -425,6 +518,7 @@
             this.Controls.Add(this.TxtEStartIP);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.TxtIP);
+            this.Controls.Add(this.label15);
             this.Controls.Add(this.label1);
             this.MaximumSize = new System.Drawing.Size(867, 640);
             this.MinimizeBox = false;
@@ -476,5 +570,13 @@
         private System.Windows.Forms.Label LabMessage;
         private System.Windows.Forms.Button BtnData;
         private System.Windows.Forms.TextBox TxtRunCommand;
+        private System.Windows.Forms.TextBox TxtTo;
+        private System.Windows.Forms.TextBox TxtFrom;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Button BtnPut;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.RadioButton RbSSH2;
+        private System.Windows.Forms.RadioButton RBTelnet;
     }
 }

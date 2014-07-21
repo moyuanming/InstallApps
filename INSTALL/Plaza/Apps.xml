@@ -5,74 +5,373 @@
   <AppList>
     <App>
       <AppName>收费站实时监控</AppName>
-      <ICOName>Monitor.ico</ICOName>
+      <ICOName>NewMonitor.ico</ICOName>
       <ExecName>TCS.Watcher.exe</ExecName>
-      <ShortcutName>实时监控</ShortcutName>
-      <SvnPath>RHYSOFT</SvnPath>
+      <ShortcutName>实时监控(TCO)</ShortcutName>
+      <Svn>@svn {0} --username @username --password @password  --non-interactive</Svn>
+      <SvnPathHead>svn://@Server/LaneSoft/</SvnPathHead>
+      <AppPathLists>
+        <AppPathList>
+          <Source>RHYSOFT</Source>
+          <Dest />
+        </AppPathList>
+        <AppPathList>
+          <Source>@NetWork@Plaza/CONFIG</Source>
+          <Dest>CONFIG</Dest>
+        </AppPathList>
+        <AppPathList>
+          <Source>RHYSOFTCONFIG</Source>
+          <Dest>CONFIGTMP</Dest>
+        </AppPathList>
+        <AppPathList>
+          <Source>ICO</Source>
+          <Dest>ICO</Dest>
+        </AppPathList>
+      </AppPathLists>
+      <PCommands>
+        <ExecCommands>
+          <Ctype>All</Ctype>
+          <CommandName>关闭程序</CommandName>
+          <Command>TASKKILL /IM @ExecName</Command>
+        </ExecCommands>
+      </PCommands>
+      <NCommands>
+        <ExecCommands>
+          <Ctype>All</Ctype>
+          <CommandName>拷贝公共配置文件到CONFIG</CommandName>
+          <Command>copy @InstallPath\CONFIGTMP\* @InstallPath\CONFIG /Y</Command>
+        </ExecCommands>
+      </NCommands>
     </App>
     <App>
       <AppName>收费站图片查询</AppName>
-      <ICOName>Image.ico</ICOName>
+      <ICOName>NewImage.ico</ICOName>
       <ExecName>全封闭收费站图片查询系统.exe</ExecName>
-      <ShortcutName>图片查询</ShortcutName>
-      <SvnPath>REPORT</SvnPath>
+      <ShortcutName>图片查询(PQS)</ShortcutName>
+      <Svn>@svn {0} --username @username --password @password  --non-interactive</Svn>
+      <SvnPathHead>svn://@Server/LaneSoft/</SvnPathHead>
+      <AppPathLists>
+        <AppPathList>
+          <Source>REPORT</Source>
+          <Dest />
+        </AppPathList>
+        <AppPathList>
+          <Source>@NetWork@Plaza/CONFIG</Source>
+          <Dest>CONFIG</Dest>
+        </AppPathList>
+        <AppPathList>
+          <Source>RHYSOFTCONFIG</Source>
+          <Dest>CONFIGTMP</Dest>
+        </AppPathList>
+        <AppPathList>
+          <Source>ICO</Source>
+          <Dest>ICO</Dest>
+        </AppPathList>
+      </AppPathLists>
+      <PCommands>
+        <ExecCommands>
+          <Ctype>All</Ctype>
+          <CommandName>关闭程序</CommandName>
+          <Command>TASKKILL /IM @ExecName</Command>
+        </ExecCommands>
+      </PCommands>
+      <NCommands>
+        <ExecCommands>
+          <Ctype>All</Ctype>
+          <CommandName>拷贝公共配置文件到CONFIG</CommandName>
+          <Command>copy @InstallPath\CONFIGTMP\* @InstallPath\CONFIG /Y</Command>
+        </ExecCommands>
+      </NCommands>
     </App>
     <App>
       <AppName>收费站报表管理</AppName>
-      <ICOName>Report.ico</ICOName>
+      <ICOName>NewReport.ico</ICOName>
       <ExecName>全封闭收费收费站报表管理系统.exe</ExecName>
-      <ShortcutName>报表管理</ShortcutName>
-      <SvnPath>REPORT</SvnPath>
+      <ShortcutName>报表管理(OPE)</ShortcutName>
+      <Svn>@svn {0} --username @username --password @password  --non-interactive</Svn>
+      <SvnPathHead>svn://@Server/LaneSoft/</SvnPathHead>
+      <AppPathLists>
+        <AppPathList>
+          <Source>REPORT</Source>
+          <Dest />
+        </AppPathList>
+        <AppPathList>
+          <Source>@NetWork@Plaza/CONFIG</Source>
+          <Dest>CONFIG</Dest>
+        </AppPathList>
+        <AppPathList>
+          <Source>RHYSOFTCONFIG</Source>
+          <Dest>CONFIGTMP</Dest>
+        </AppPathList>
+        <AppPathList>
+          <Source>ICO</Source>
+          <Dest>ICO</Dest>
+        </AppPathList>
+      </AppPathLists>
+      <PCommands>
+        <ExecCommands>
+          <Ctype>All</Ctype>
+          <CommandName>关闭程序</CommandName>
+          <Command>TASKKILL /IM @ExecName</Command>
+        </ExecCommands>
+      </PCommands>
+      <NCommands>
+        <ExecCommands>
+          <Ctype>All</Ctype>
+          <CommandName>拷贝公共配置文件到CONFIG</CommandName>
+          <Command>copy @InstallPath\CONFIGTMP\* @InstallPath\CONFIG /Y</Command>
+        </ExecCommands>
+      </NCommands>
     </App>
     <App>
       <AppName>收费站卡管理</AppName>
-      <ICOName>CCM.ico</ICOName>
+      <ICOName>NewCCM.ico</ICOName>
       <ExecName>全封闭收费站卡管理系统.exe</ExecName>
-      <ShortcutName>卡管理</ShortcutName>
-      <SvnPath>REPORT</SvnPath>
+      <ShortcutName>卡管理(CCM)</ShortcutName>
+      <Svn>@svn {0} --username @username --password @password  --non-interactive</Svn>
+      <SvnPathHead>svn://@Server/LaneSoft/</SvnPathHead>
+      <AppPathLists>
+        <AppPathList>
+          <Source>REPORT</Source>
+          <Dest />
+        </AppPathList>
+        <AppPathList>
+          <Source>@NetWork@Plaza/CONFIG</Source>
+          <Dest>CONFIG</Dest>
+        </AppPathList>
+        <AppPathList>
+          <Source>RHYSOFTCONFIG</Source>
+          <Dest>CONFIGTMP</Dest>
+        </AppPathList>
+        <AppPathList>
+          <Source>ICO</Source>
+          <Dest>ICO</Dest>
+        </AppPathList>
+      </AppPathLists>
+      <PCommands>
+        <ExecCommands>
+          <Ctype>All</Ctype>
+          <CommandName>关闭程序</CommandName>
+          <Command>TASKKILL /IM @ExecName</Command>
+        </ExecCommands>
+      </PCommands>
+      <NCommands>
+        <ExecCommands>
+          <Ctype>All</Ctype>
+          <CommandName>拷贝公共配置文件到CONFIG</CommandName>
+          <Command>copy @InstallPath\CONFIGTMP\* @InstallPath\CONFIG /Y</Command>
+        </ExecCommands>
+      </NCommands>
     </App>
     <App>
       <AppName>收费站参数管理</AppName>
-      <ICOName>PTM.ico</ICOName>
+      <ICOName>NewPTM.ico</ICOName>
       <ExecName>全封闭收费站参数管理系统.exe</ExecName>
-      <ShortcutName>参数管理</ShortcutName>
-      <SvnPath>REPORT</SvnPath>
+      <ShortcutName>参数管理(PTM)</ShortcutName>
+      <Svn>@svn {0} --username @username --password @password  --non-interactive</Svn>
+      <SvnPathHead>svn://@Server/LaneSoft/</SvnPathHead>
+      <AppPathLists>
+        <AppPathList>
+          <Source>REPORT</Source>
+          <Dest />
+        </AppPathList>
+        <AppPathList>
+          <Source>@NetWork@Plaza/CONFIG</Source>
+          <Dest>CONFIG</Dest>
+        </AppPathList>
+        <AppPathList>
+          <Source>RHYSOFTCONFIG</Source>
+          <Dest>CONFIGTMP</Dest>
+        </AppPathList>
+        <AppPathList>
+          <Source>ICO</Source>
+          <Dest>ICO</Dest>
+        </AppPathList>
+      </AppPathLists>
+      <PCommands>
+        <ExecCommands>
+          <Ctype>All</Ctype>
+          <CommandName>关闭程序</CommandName>
+          <Command>TASKKILL /IM @ExecName</Command>
+        </ExecCommands>
+      </PCommands>
+      <NCommands>
+        <ExecCommands>
+          <Ctype>All</Ctype>
+          <CommandName>拷贝公共配置文件到CONFIG</CommandName>
+          <Command>copy @InstallPath\CONFIGTMP\* @InstallPath\CONFIG /Y</Command>
+        </ExecCommands>
+      </NCommands>
     </App>
     <App>
       <AppName>全封闭(分)中心参数管理系统</AppName>
-      <ICOName>PTM.ico</ICOName>
+      <ICOName>NewPTM.ico</ICOName>
       <ExecName>全封闭(分)中心参数管理系统.exe</ExecName>
-      <ShortcutName>参数管理</ShortcutName>
-      <SvnPath>REPORT</SvnPath>
+      <ShortcutName>参数管理(PTM)</ShortcutName>
+      <Svn>@svn {0} --username @username --password @password  --non-interactive</Svn>
+      <SvnPathHead>svn://@Server/LaneSoft/</SvnPathHead>
+      <AppPathLists>
+        <AppPathList>
+          <Source>REPORT</Source>
+          <Dest />
+        </AppPathList>
+        <AppPathList>
+          <Source>@NetWork@Plaza/CONFIG</Source>
+          <Dest>CONFIG</Dest>
+        </AppPathList>
+        <AppPathList>
+          <Source>RHYSOFTCONFIG</Source>
+          <Dest>CONFIGTMP</Dest>
+        </AppPathList>
+        <AppPathList>
+          <Source>ICO</Source>
+          <Dest>ICO</Dest>
+        </AppPathList>
+      </AppPathLists>
+      <PCommands>
+        <ExecCommands>
+          <Ctype>All</Ctype>
+          <CommandName>关闭程序</CommandName>
+          <Command>TASKKILL /IM @ExecName</Command>
+        </ExecCommands>
+      </PCommands>
+      <NCommands>
+        <ExecCommands>
+          <Ctype>All</Ctype>
+          <CommandName>拷贝公共配置文件到CONFIG</CommandName>
+          <Command>copy @InstallPath\CONFIGTMP\* @InstallPath\CONFIG /Y</Command>
+        </ExecCommands>
+      </NCommands>
     </App>
     <App>
       <AppName>分中心图片查询</AppName>
-      <ICOName>Image.ico</ICOName>
+      <ICOName>NewImage.ico</ICOName>
       <ExecName>全封闭(分)中心图片查询系统.exe</ExecName>
-      <ShortcutName>图片查询</ShortcutName>
-      <SvnPath>REPORT</SvnPath>
+      <ShortcutName>图片查询(PQS)</ShortcutName>
+      <Svn>@svn {0} --username @username --password @password  --non-interactive</Svn>
+      <SvnPathHead>svn://@Server/LaneSoft/</SvnPathHead>
+      <AppPathLists>
+        <AppPathList>
+          <Source>REPORT</Source>
+          <Dest />
+        </AppPathList>
+        <AppPathList>
+          <Source>@NetWork@Plaza/CONFIG</Source>
+          <Dest>CONFIG</Dest>
+        </AppPathList>
+        <AppPathList>
+          <Source>RHYSOFTCONFIG</Source>
+          <Dest>CONFIGTMP</Dest>
+        </AppPathList>
+        <AppPathList>
+          <Source>ICO</Source>
+          <Dest>ICO</Dest>
+        </AppPathList>
+      </AppPathLists>
+      <PCommands>
+        <ExecCommands>
+          <Ctype>All</Ctype>
+          <CommandName>关闭程序</CommandName>
+          <Command>TASKKILL /IM @ExecName</Command>
+        </ExecCommands>
+      </PCommands>
+      <NCommands>
+        <ExecCommands>
+          <Ctype>All</Ctype>
+          <CommandName>拷贝公共配置文件到CONFIG</CommandName>
+          <Command>copy @InstallPath\CONFIGTMP\* @InstallPath\CONFIG /Y</Command>
+        </ExecCommands>
+      </NCommands>
     </App>
     <App>
       <AppName>分中心报表管理系统</AppName>
-      <ICOName>Report.ico</ICOName>
+      <ICOName>NewReport.ico</ICOName>
       <ExecName>全封闭收费(分)中心报表管理系统.exe</ExecName>
-      <ShortcutName>报表管理</ShortcutName>
-      <SvnPath>REPORT</SvnPath>
+      <ShortcutName>报表管理(OPE)</ShortcutName>
+      <Svn>@svn {0} --username @username --password @password  --non-interactive</Svn>
+      <SvnPathHead>svn://@Server/LaneSoft/</SvnPathHead>
+      <AppPathLists>
+        <AppPathList>
+          <Source>REPORT</Source>
+          <Dest />
+        </AppPathList>
+        <AppPathList>
+          <Source>@NetWork@Plaza/CONFIG</Source>
+          <Dest>CONFIG</Dest>
+        </AppPathList>
+        <AppPathList>
+          <Source>RHYSOFTCONFIG</Source>
+          <Dest>CONFIGTMP</Dest>
+        </AppPathList>
+        <AppPathList>
+          <Source>ICO</Source>
+          <Dest>ICO</Dest>
+        </AppPathList>
+      </AppPathLists>
+      <PCommands>
+        <ExecCommands>
+          <Ctype>All</Ctype>
+          <CommandName>关闭程序</CommandName>
+          <Command>TASKKILL /IM @ExecName</Command>
+        </ExecCommands>
+      </PCommands>
+      <NCommands>
+        <ExecCommands>
+          <Ctype>All</Ctype>
+          <CommandName>拷贝公共配置文件到CONFIG</CommandName>
+          <Command>copy @InstallPath\CONFIGTMP\* @InstallPath\CONFIG /Y</Command>
+        </ExecCommands>
+      </NCommands>
     </App>
     <App>
       <AppName>分中心卡管理</AppName>
-      <ICOName>CCM.ico</ICOName>
+      <ICOName>NewCCM.ico</ICOName>
       <ExecName>全封闭收费(分)中心卡管理系统.exe</ExecName>
-      <ShortcutName>卡管理</ShortcutName>
-      <SvnPath>REPORT</SvnPath>
+      <ShortcutName>卡管理(CCM)</ShortcutName>
+      <Svn>@svn {0} --username @username --password @password  --non-interactive</Svn>
+      <SvnPathHead>svn://@Server/LaneSoft/</SvnPathHead>
+      <AppPathLists>
+        <AppPathList>
+          <Source>REPORT</Source>
+          <Dest />
+        </AppPathList>
+        <AppPathList>
+          <Source>@NetWork@Plaza/CONFIG</Source>
+          <Dest>CONFIG</Dest>
+        </AppPathList>
+        <AppPathList>
+          <Source>RHYSOFTCONFIG</Source>
+          <Dest>CONFIGTMP</Dest>
+        </AppPathList>
+        <AppPathList>
+          <Source>ICO</Source>
+          <Dest>ICO</Dest>
+        </AppPathList>
+      </AppPathLists>
+      <PCommands>
+        <ExecCommands>
+          <Ctype>All</Ctype>
+          <CommandName>关闭程序</CommandName>
+          <Command>TASKKILL /IM @ExecName</Command>
+        </ExecCommands>
+      </PCommands>
+      <NCommands>
+        <ExecCommands>
+          <Ctype>All</Ctype>
+          <CommandName>拷贝公共配置文件到CONFIG</CommandName>
+          <Command>copy @InstallPath\CONFIGTMP\* @InstallPath\CONFIG /Y</Command>
+        </ExecCommands>
+      </NCommands>
     </App>
   </AppList>
   <Commands>
     <ExecCommands>
+      <Ctype>All</Ctype>
       <CommandName>更新服务器</CommandName>
       <Command>D:\RHYSOFT\BOSS\系统必备\updatetollsvr.cmd</Command>
     </ExecCommands>
     <ExecCommands>
+      <Ctype>All</Ctype>
       <CommandName>在服务器上创建收费服务</CommandName>
       <Command>D:\RHYSOFT\BOSS\系统必备\buildtollsvr.cmd</Command>
     </ExecCommands>

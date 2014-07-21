@@ -8,7 +8,7 @@ namespace InstallLaneApp
     public delegate void RetMessage(string Message);
     public delegate void RetPress(int Message);
     public delegate void RetState(bool ret);
-    interface ECToolsInterface
+   public  interface ECToolsInterface
     {
          event RetMessage RetMessageEvent;
          event RetPress RetPressEvent;

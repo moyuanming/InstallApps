@@ -8,7 +8,7 @@ using Tamir.SharpSsh;
 using System.Data;
 namespace InstallLaneApp
 {
-    class SSh2Tools :ECToolsInterface
+    public class SSh2Tools :ECToolsInterface
     {
 
         public event RetMessage RetMessageEvent;

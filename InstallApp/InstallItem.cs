@@ -109,7 +109,34 @@ namespace InstallApp
             }
         }
     }
+   public   enum CommandType:int { All,Frist,Last };
 
+    
+     public class ExecCommands
+     {
+
+
+         CommandType _Ctype = CommandType.All;
+         public InstallApp.CommandType Ctype
+         {
+             get { return _Ctype; }
+             set { _Ctype = value; }
+         }
+
+         string _commandName = "";
+         public string CommandName
+         {
+             get { return _commandName; }
+             set { _commandName = value; }
+         }
+         string _Command;
+         public string Command
+         {
+             get { return _Command; }
+             set { _Command = value; }
+         }
+
+     }
      public class App
      {
          string _AppName;
@@ -136,31 +163,97 @@ namespace InstallApp
              get { return _ShortcutName; }
              set { _ShortcutName = value; }
          }
-      
-         string _SvnPath;
-         public string SvnPath
+         string _Svn = "@svn {0} --username @username --password @password  --non-interactive";
+
+         public string Svn
          {
-             get { return _SvnPath; }
-             set { _SvnPath = value; }
+             get { return _Svn; }
+             set { _Svn = value; }
          }
-    }
-     [Serializable]
-     public class ExecCommands
-     {
-         string _commandName = "";
-         public string CommandName
+         string _SvnPathHead = "svn://@Server/LaneSoft/";
+         public string SvnPathHead
          {
-             get { return _commandName; }
-             set { _commandName = value; }
+             get { return _SvnPathHead; }
+             set { _SvnPathHead = value; }
          }
-         string _Command;
-         public string Command
+         List<AppPathList> _AppPathLists = new List<AppPathList>();
+         public List<AppPathList> AppPathLists
          {
-             get { return _Command; }
-             set { _Command = value; }
+             get { return _AppPathLists; }
+             set { _AppPathLists = value; }
          }
 
+         List<ExecCommands> _PCommands = new List<ExecCommands>();
+         public List<ExecCommands> PCommands
+         {
+             get { return _PCommands; }
+             set { _PCommands = value; }
+         }
+         List<ExecCommands> _NCommands = new List<ExecCommands>();
+         public List<ExecCommands> NCommands
+         {
+             get { return _NCommands; }
+             set { _NCommands = value; }
+         }
+        public string[] GetInstallSvnCommands()
+         {
+             string Svnco = string.Format(Svn,"co");
+             string[] InstallSvnCommands = new string[AppPathLists.Count];
+             for (int i = 0; i < AppPathLists.Count; i++)
+             {
+                 InstallSvnCommands[i] = string.Format(@"{0} {3}{1} @InstallPath\{2}", Svnco, AppPathLists[i].Source, AppPathLists[i].Dest, SvnPathHead);
+             }
+             return InstallSvnCommands;
+         }
+         public string[] GetUpdateSvnCommands()
+         {
+             string Svnco = string.Format(Svn, "up");
+             string[] UpdateSvnCommands = new string[AppPathLists.Count];
+             for (int i = 0; i < AppPathLists.Count; i++)
+             {
+                 UpdateSvnCommands[i] = string.Format(@"{0}  @InstallPath\{1}", Svnco,  AppPathLists[i].Dest);
+             }
+             return UpdateSvnCommands;
+         }
+         public string[] GetLastCommands()
+         {
+
+             string[] cmd = new string[NCommands.Count];
+             for (int i = 0; i < NCommands.Count; i++)
+             {
+                 cmd[i] = NCommands[i].Command;
+             }
+             return cmd;
+         }
+         public string[] GetFristCommands()
+         {
+
+             string[] cmd = new string[PCommands.Count];
+             for (int i = 0; i < PCommands.Count; i++)
+             {
+                 cmd[i] = PCommands[i].Command;
+             }
+             return cmd;
+         }
+    }
+
+     public class AppPathList
+     {
+         string _Source;
+         public string Source
+         {
+             get { return _Source; }
+             set { _Source = value; }
+         }
+         string _Dest;
+         public string Dest
+         {
+             get { return _Dest; }
+             set { _Dest = value; }
+         }
      }
+  
+   
     [Serializable]
     public class InstallItem
     {

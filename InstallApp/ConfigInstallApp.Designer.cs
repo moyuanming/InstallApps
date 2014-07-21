@@ -38,6 +38,7 @@
             this.PgApps.Dock = System.Windows.Forms.DockStyle.Top;
             this.PgApps.Location = new System.Drawing.Point(0, 0);
             this.PgApps.Name = "PgApps";
+            this.PgApps.PropertySort = System.Windows.Forms.PropertySort.Categorized;
             this.PgApps.Size = new System.Drawing.Size(281, 332);
             this.PgApps.TabIndex = 0;
             // 

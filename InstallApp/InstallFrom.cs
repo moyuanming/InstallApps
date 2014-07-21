@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.Diagnostics;
 using IWshRuntimeLibrary;//先添加Windows Script Host Object Model的引用 Com里
 using System.Threading;
+using InstallLaneApp;
 namespace InstallApp
 {
    
@@ -22,11 +23,7 @@ namespace InstallApp
         public InstallFrom()
         {
             InitializeComponent();
-        }
-        public string Execute(string dosCommand)
-        {
-            return Execute(dosCommand, 1000);
-        }
+        }  
         /// <summary>  
         /// 执行DOS命令，返回DOS命令的输出  
         /// </summary>  
@@ -76,15 +73,45 @@ namespace InstallApp
             return output;
         }
 
+        void ExecSSHCmd(string CmdString)
+        {
+            ECToolsInterface ECServer;            
+            ECServer = new SSh2Tools();           
+            ECServer.RetMessageEvent += SSh_RetMessageEvent;
+            ECServer.RetPressEvent += SSh_RetPressEvent;
+            ECServer.RetStateEnevt += SSh_RetStateEnevt;
+            ECServer.ExecCommand(TxtSSHIP.Text,TxtSShUser.Text ,TxtSShPwd.Text, CmdString);
 
+        }
+        bool RetState = true;
+        void SSh_RetStateEnevt(bool ret)
+        {
+            RetState = ret;
+        }
+        int RetValue = 0;
+        void SSh_RetPressEvent(int Input)
+        {
+            RetValue = Input;
+        }
+        string RetMsg = "";
+        void SSh_RetMessageEvent(string Message)
+        {
+            TxtMssage += Message + "\r\n";
+        }
+        public string Execute(string dosCommand)
+        {
+            return Execute(dosCommand, 1000);
+        }
+     
         private void CreateShortcut(string AppPath, string Appname, string WorkingDirectory,string ICOFileName)
         {
+            // string AppPath, string Appname, string WorkingDirectory,string ICOFileName
             WshShell shell = new WshShell();
             IWshShortcut shortcut = (IWshShortcut)shell.CreateShortcut(
               Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory) +
-              "\\" + Appname +  ".lnk"
+              "\\" + Appname + ".lnk"
             );
-            shortcut.TargetPath = AppPath;          
+            shortcut.TargetPath = AppPath;
             shortcut.WindowStyle = 1;
             shortcut.WorkingDirectory = WorkingDirectory;
             shortcut.IconLocation = ICOFileName;
@@ -114,71 +141,76 @@ namespace InstallApp
         string SvnPwd = "";
         string Plaza = "";
         string NetWork = "";
-        
+        void ExecCommands( string[] SvnCommands,int startBp, int endBp )
+        {
+            float  Sit = (float)(endBp - startBp) / SvnCommands.Length;
+            float AllSit=0 ;
+            for (int i = 0; i < SvnCommands.Length; i++)
+            {
+
+                SvnCommands[i] = ReplaceStr(SvnCommands[i]);
+                if (RbLocal.Checked)
+                {
+                    TxtMssage += string.Format(@"C:\>{0}", SvnCommands[i]) + "\r\n";
+                    TxtMssage += Execute(SvnCommands[i]) + "\r\n";
+                    AllSit += Sit;
+                    BarPress = startBp + (int)AllSit;
+                }
+                else
+                {
+                    ExecSSHCmd(SvnCommands[i]);
+                }
+            }
+
+        }
         void Install()
         {
             TxtMssage = "";
             BarPress = 10;
-           
-            string svncmdHead = string.Format(@"{1}\Subversion\bin\svn co --username {2} --password {3}  --non-interactive svn://{0}/LaneSoft/", TxtIP.Text, System.Environment.CurrentDirectory, TxtSvnName.Text, TxtSvnPwd.Text);
-            TxtMssage += string.Format("Install：{0} \r\n ", InstallApps.AppName);
-            BarPress = 20;
-            string svncmd = string.Format(@"{0}{2}/ {1}", svncmdHead, TxtInstallPath.Text, InstallApps.SvnPath);
-            TxtMssage += string.Format(@"C:\>{0}", svncmd) +  "\r\n";
-            TxtMssage += Execute(svncmd) + "\r\n";
-            BarPress = 50;
-            string svncmdConfig = string.Format(@"{0}{1}{2}/CONFIG {3}\CONFIG", svncmdHead, TxtNet.Text, Plaza, TxtInstallPath.Text);
-            TxtMssage += string.Format(@"C:\>{0}", svncmdConfig) + "\r\n";
-            BarPress = 60;
-            TxtMssage += Execute(svncmdConfig);
-
-
-            svncmdConfig = string.Format(@"{0}/RHYSOFTCONFIG {1}\CONFIGTMP", svncmdHead,  TxtInstallPath.Text);
-            TxtMssage += string.Format(@"C:\>{0}", svncmdConfig) + "\r\n";
-            BarPress = 70;
-            TxtMssage += Execute(svncmdConfig);
-
-            svncmdConfig = string.Format(@"xcopy {0}\CONFIGTMP\* {0}\CONFIG\  /Y", TxtInstallPath.Text, InstallApps.SvnPath);
-            TxtMssage += string.Format(@"C:\>{0}", svncmdConfig) + "\r\n";
-            TxtMssage += Execute(svncmdConfig);
-            BarPress = 80;
-            svncmdConfig = string.Format(@"{0}/ICO {1}\ICO", svncmdHead, TxtInstallPath.Text);
-            TxtMssage += string.Format(@"C:\>{0}", svncmdConfig) + "\r\n";
-            BarPress = 90;
-            TxtMssage += Execute(svncmdConfig) + "\r\n"; ;
-            CreateShortcut(string.Format(@"{0}\BIN\{1}", TxtInstallPath.Text, InstallApps.ExecName), InstallApps.ShortcutName, TxtInstallPath.Text + @"\BIN", TxtInstallPath.Text + @"\ICO\" + InstallApps.ICOName);
+            UploadShortCatFile();
+            ExecCommands(InstallApps.GetFristCommands(), 10, 20);
+            ExecCommands(InstallApps.GetInstallSvnCommands(),20,90);
+            ExecCommands(InstallApps.GetLastCommands(), 90, 95);
+            if (RbLocal.Checked)
+            {
+                CreateShortcut(string.Format(@"{0}\BIN\{1}", TxtInstallPath.Text, InstallApps.ExecName), InstallApps.ShortcutName, TxtInstallPath.Text + @"\BIN", TxtInstallPath.Text + @"\ICO\" + InstallApps.ICOName);
+  
+            }
+            else
+            {
+                string ShortcutCmad = string.Format(@"ShortCut.exe {0} {1} {2} {3}", string.Format(@"{0}\BIN\{1}", TxtInstallPath.Text, InstallApps.ExecName), InstallApps.ShortcutName, TxtInstallPath.Text + @"\BIN", TxtInstallPath.Text + @"\ICO\" + InstallApps.ICOName);
+                ExecSSHCmd(ShortcutCmad);
+            }
+          
+            
             BarPress = 100;
+        }
+        string ReplaceStr(string svncmd)
+        {
+            string svn = string.Format(@"{0}\Subversion\bin\svn ", RbLocal.Checked ? System.Environment.CurrentDirectory : @"C:");
+            svncmd = svncmd.Replace("@svn", svn);
+            svncmd = svncmd.Replace("@Server", TxtIP.Text);
+            svncmd = svncmd.Replace("@username",  TxtSvnName.Text);
+            svncmd = svncmd.Replace("@password",  TxtSvnPwd.Text);
+            svncmd = svncmd.Replace("@NetWork", TxtNet.Text);
+            svncmd = svncmd.Replace("@Plaza", Plaza);
+            svncmd = svncmd.Replace("@InstallPath", TxtInstallPath.Text);
+            svncmd = svncmd.Replace("@ExecName", InstallApps.ExecName);
+            return svncmd;
         }
         void UpdateApp()
         {
             TxtMssage = "";
             BarPress = 10;
-
-            TxtMssage += string.Format("Update Pro \r\n ");
-            
-            string svnUpdateCmd = string.Format(@"{1}\Subversion\bin\svn up --username {2} --password {3}  --non-interactive {0}", TxtInstallPath.Text, System.Environment.CurrentDirectory,TxtSvnName.Text,TxtSvnPwd.Text);
-            BarPress = 20;
-            TxtMssage += string.Format(@"C:\>{0}", svnUpdateCmd) + "\r\n";
-            BarPress = 30;
-            TxtMssage += Execute(svnUpdateCmd);
-            BarPress = 60;
-            svnUpdateCmd = string.Format(@"{1}\Subversion\bin\svn up --username {2} --password {3}  --non-interactive {0}\CONFIG", TxtInstallPath.Text, System.Environment.CurrentDirectory,TxtSvnName.Text,TxtSvnPwd.Text);
-            BarPress = 70;
-            TxtMssage += string.Format(@"C:\>{0}", svnUpdateCmd) + "\r\n";
-            TxtMssage += Execute(svnUpdateCmd);
-
-
-            svnUpdateCmd = string.Format(@"{1}\Subversion\bin\svn up --username {2} --password {3}  --non-interactive {0}\CONFIGTMP", TxtInstallPath.Text, System.Environment.CurrentDirectory, TxtSvnName.Text, TxtSvnPwd.Text);
-            BarPress = 80;
-            TxtMssage += string.Format(@"C:\>{0}", svnUpdateCmd) + "\r\n";
-            TxtMssage += Execute(svnUpdateCmd);
-
-            svnUpdateCmd = string.Format(@"xcopy {0}\CONFIGTMP\* {0}\CONFIG\  /Y", TxtInstallPath.Text, InstallApps.SvnPath);
-            TxtMssage += string.Format(@"C:\>{0}", svnUpdateCmd) + "\r\n";
-            BarPress = 90;
-            TxtMssage += Execute(svnUpdateCmd);
-
+            ExecCommands(InstallApps.GetFristCommands(), 10, 20);
+            ExecCommands(InstallApps.GetUpdateSvnCommands(), 20, 90);
+            ExecCommands(InstallApps.GetLastCommands(), 90, 95);
             BarPress = 100;
+        }
+        void UploadShortCatFile()
+        {
+            SFtptools.SftpUpload(TxtSSHIP.Text, TxtSShUser.Text, TxtSShPwd.Text, "ShortCut.exe", @"ShortCut.exe");
+            SFtptools.SftpUpload(TxtSSHIP.Text, TxtSShUser.Text, TxtSShPwd.Text, "Interop.IWshRuntimeLibrary.dll", "Interop.IWshRuntimeLibrary.dll");
         }
         private void BtnInstall_Click(object sender, EventArgs e)
         {
@@ -190,6 +222,8 @@ namespace InstallApp
         }
         private void BtnUpdate_Click(object sender, EventArgs e)
         {
+            InstallApps = GetApp(CbxApp.Text);
+            Plaza = CbxPlaza.Text;
             Thread Tr = new Thread(UpdateApp);
             Tr.Start();
         }

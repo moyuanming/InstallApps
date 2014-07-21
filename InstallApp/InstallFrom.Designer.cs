@@ -62,11 +62,19 @@
             this.BtnExeccmd = new System.Windows.Forms.Button();
             this.CbxRunCmd = new System.Windows.Forms.ComboBox();
             this.TxtRunCommand = new System.Windows.Forms.TextBox();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.TxtSShUser = new System.Windows.Forms.TextBox();
+            this.TxtSShPwd = new System.Windows.Forms.TextBox();
+            this.label16 = new System.Windows.Forms.Label();
+            this.TxtSSHIP = new System.Windows.Forms.TextBox();
+            this.RBRemote = new System.Windows.Forms.RadioButton();
+            this.RbLocal = new System.Windows.Forms.RadioButton();
             this.SuspendLayout();
             // 
             // BtnInstall
             // 
-            this.BtnInstall.Location = new System.Drawing.Point(755, 191);
+            this.BtnInstall.Location = new System.Drawing.Point(674, 241);
             this.BtnInstall.Name = "BtnInstall";
             this.BtnInstall.Size = new System.Drawing.Size(75, 23);
             this.BtnInstall.TabIndex = 0;
@@ -76,7 +84,7 @@
             // 
             // BtnUpdate
             // 
-            this.BtnUpdate.Location = new System.Drawing.Point(487, 537);
+            this.BtnUpdate.Location = new System.Drawing.Point(755, 241);
             this.BtnUpdate.Name = "BtnUpdate";
             this.BtnUpdate.Size = new System.Drawing.Size(75, 23);
             this.BtnUpdate.TabIndex = 1;
@@ -86,7 +94,7 @@
             // 
             // BtnClose
             // 
-            this.BtnClose.Location = new System.Drawing.Point(736, 537);
+            this.BtnClose.Location = new System.Drawing.Point(736, 588);
             this.BtnClose.Name = "BtnClose";
             this.BtnClose.Size = new System.Drawing.Size(75, 23);
             this.BtnClose.TabIndex = 2;
@@ -97,7 +105,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(60, 138);
+            this.label1.Location = new System.Drawing.Point(59, 190);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(53, 12);
             this.label1.TabIndex = 3;
@@ -106,7 +114,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(465, 138);
+            this.label2.Location = new System.Drawing.Point(465, 190);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(41, 12);
             this.label2.TabIndex = 3;
@@ -114,7 +122,7 @@
             // 
             // TxtNet
             // 
-            this.TxtNet.Location = new System.Drawing.Point(133, 134);
+            this.TxtNet.Location = new System.Drawing.Point(133, 186);
             this.TxtNet.Name = "TxtNet";
             this.TxtNet.Size = new System.Drawing.Size(305, 21);
             this.TxtNet.TabIndex = 4;
@@ -123,7 +131,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(84, 167);
+            this.label3.Location = new System.Drawing.Point(83, 246);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(29, 12);
             this.label3.TabIndex = 3;
@@ -132,9 +140,9 @@
             // CbxApp
             // 
             this.CbxApp.FormattingEnabled = true;
-            this.CbxApp.Location = new System.Drawing.Point(133, 163);
+            this.CbxApp.Location = new System.Drawing.Point(133, 242);
             this.CbxApp.Name = "CbxApp";
-            this.CbxApp.Size = new System.Drawing.Size(697, 20);
+            this.CbxApp.Size = new System.Drawing.Size(534, 20);
             this.CbxApp.TabIndex = 5;
             this.CbxApp.Text = "Monitor";
             // 
@@ -170,7 +178,7 @@
             "59",
             "60",
             "61"});
-            this.CbxPlaza.Location = new System.Drawing.Point(525, 134);
+            this.CbxPlaza.Location = new System.Drawing.Point(525, 186);
             this.CbxPlaza.Name = "CbxPlaza";
             this.CbxPlaza.Size = new System.Drawing.Size(305, 20);
             this.CbxPlaza.TabIndex = 5;
@@ -179,7 +187,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(54, 78);
+            this.label5.Location = new System.Drawing.Point(53, 78);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(59, 12);
             this.label5.TabIndex = 3;
@@ -196,7 +204,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(30, 196);
+            this.label6.Location = new System.Drawing.Point(29, 218);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(83, 12);
             this.label6.TabIndex = 3;
@@ -204,33 +212,33 @@
             // 
             // TxtInstallPath
             // 
-            this.TxtInstallPath.Location = new System.Drawing.Point(133, 192);
+            this.TxtInstallPath.Location = new System.Drawing.Point(133, 214);
             this.TxtInstallPath.Name = "TxtInstallPath";
-            this.TxtInstallPath.Size = new System.Drawing.Size(619, 21);
+            this.TxtInstallPath.Size = new System.Drawing.Size(697, 21);
             this.TxtInstallPath.TabIndex = 4;
             this.TxtInstallPath.Text = "D:\\RHYSOFT";
             // 
             // label7
             // 
             this.label7.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.label7.Location = new System.Drawing.Point(7, 250);
+            this.label7.Location = new System.Drawing.Point(7, 299);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(833, 2);
             this.label7.TabIndex = 6;
             // 
             // TxtResult
             // 
-            this.TxtResult.Location = new System.Drawing.Point(133, 255);
+            this.TxtResult.Location = new System.Drawing.Point(133, 304);
             this.TxtResult.Multiline = true;
             this.TxtResult.Name = "TxtResult";
             this.TxtResult.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.TxtResult.Size = new System.Drawing.Size(697, 237);
+            this.TxtResult.Size = new System.Drawing.Size(697, 239);
             this.TxtResult.TabIndex = 4;
             // 
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(60, 258);
+            this.label8.Location = new System.Drawing.Point(60, 307);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(47, 12);
             this.label8.TabIndex = 3;
@@ -246,7 +254,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(653, 537);
+            this.button1.Location = new System.Drawing.Point(653, 588);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 1;
@@ -256,7 +264,7 @@
             // 
             // BtnClearMsg
             // 
-            this.BtnClearMsg.Location = new System.Drawing.Point(570, 537);
+            this.BtnClearMsg.Location = new System.Drawing.Point(570, 588);
             this.BtnClearMsg.Name = "BtnClearMsg";
             this.BtnClearMsg.Size = new System.Drawing.Size(75, 23);
             this.BtnClearMsg.TabIndex = 1;
@@ -266,7 +274,7 @@
             // 
             // BtnSetTime
             // 
-            this.BtnSetTime.Location = new System.Drawing.Point(320, 537);
+            this.BtnSetTime.Location = new System.Drawing.Point(406, 588);
             this.BtnSetTime.Name = "BtnSetTime";
             this.BtnSetTime.Size = new System.Drawing.Size(75, 23);
             this.BtnSetTime.TabIndex = 8;
@@ -277,14 +285,14 @@
             // label10
             // 
             this.label10.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.label10.Location = new System.Drawing.Point(5, 527);
+            this.label10.Location = new System.Drawing.Point(5, 578);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(833, 2);
             this.label10.TabIndex = 9;
             // 
             // BtnSetTime8
             // 
-            this.BtnSetTime8.Location = new System.Drawing.Point(403, 537);
+            this.BtnSetTime8.Location = new System.Drawing.Point(489, 588);
             this.BtnSetTime8.Name = "BtnSetTime8";
             this.BtnSetTime8.Size = new System.Drawing.Size(75, 23);
             this.BtnSetTime8.TabIndex = 10;
@@ -295,7 +303,7 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(60, 108);
+            this.label11.Location = new System.Drawing.Point(59, 106);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(53, 12);
             this.label11.TabIndex = 3;
@@ -303,7 +311,7 @@
             // 
             // TxtSvnName
             // 
-            this.TxtSvnName.Location = new System.Drawing.Point(133, 104);
+            this.TxtSvnName.Location = new System.Drawing.Point(133, 102);
             this.TxtSvnName.Name = "TxtSvnName";
             this.TxtSvnName.Size = new System.Drawing.Size(305, 21);
             this.TxtSvnName.TabIndex = 4;
@@ -312,7 +320,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(459, 108);
+            this.label12.Location = new System.Drawing.Point(459, 106);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(47, 12);
             this.label12.TabIndex = 3;
@@ -320,7 +328,7 @@
             // 
             // TxtSvnPwd
             // 
-            this.TxtSvnPwd.Location = new System.Drawing.Point(525, 104);
+            this.TxtSvnPwd.Location = new System.Drawing.Point(525, 102);
             this.TxtSvnPwd.Name = "TxtSvnPwd";
             this.TxtSvnPwd.PasswordChar = '*';
             this.TxtSvnPwd.Size = new System.Drawing.Size(305, 21);
@@ -335,7 +343,7 @@
             // 
             // PbExec
             // 
-            this.PbExec.Location = new System.Drawing.Point(134, 498);
+            this.PbExec.Location = new System.Drawing.Point(134, 549);
             this.PbExec.Name = "PbExec";
             this.PbExec.Size = new System.Drawing.Size(696, 23);
             this.PbExec.TabIndex = 22;
@@ -343,7 +351,7 @@
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(59, 223);
+            this.label13.Location = new System.Drawing.Point(59, 273);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(53, 12);
             this.label13.TabIndex = 3;
@@ -351,7 +359,7 @@
             // 
             // BtnExeccmd
             // 
-            this.BtnExeccmd.Location = new System.Drawing.Point(755, 219);
+            this.BtnExeccmd.Location = new System.Drawing.Point(755, 268);
             this.BtnExeccmd.Name = "BtnExeccmd";
             this.BtnExeccmd.Size = new System.Drawing.Size(75, 23);
             this.BtnExeccmd.TabIndex = 23;
@@ -365,7 +373,7 @@
             this.CbxRunCmd.Items.AddRange(new object[] {
             "ls /EMRCV5/BIN",
             "cat /EMRCV5/CONFIG/AppFunction.ini"});
-            this.CbxRunCmd.Location = new System.Drawing.Point(133, 223);
+            this.CbxRunCmd.Location = new System.Drawing.Point(133, 269);
             this.CbxRunCmd.Name = "CbxRunCmd";
             this.CbxRunCmd.Size = new System.Drawing.Size(257, 20);
             this.CbxRunCmd.TabIndex = 25;
@@ -374,17 +382,93 @@
             // 
             // TxtRunCommand
             // 
-            this.TxtRunCommand.Location = new System.Drawing.Point(396, 222);
+            this.TxtRunCommand.Location = new System.Drawing.Point(398, 269);
             this.TxtRunCommand.Name = "TxtRunCommand";
-            this.TxtRunCommand.Size = new System.Drawing.Size(356, 21);
+            this.TxtRunCommand.Size = new System.Drawing.Size(353, 21);
             this.TxtRunCommand.TabIndex = 24;
             this.TxtRunCommand.Text = "51";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(59, 162);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(53, 12);
+            this.label14.TabIndex = 3;
+            this.label14.Text = "SSHUser:";
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(459, 162);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(47, 12);
+            this.label15.TabIndex = 3;
+            this.label15.Text = "SSHPwd:";
+            // 
+            // TxtSShUser
+            // 
+            this.TxtSShUser.Location = new System.Drawing.Point(133, 158);
+            this.TxtSShUser.Name = "TxtSShUser";
+            this.TxtSShUser.Size = new System.Drawing.Size(305, 21);
+            this.TxtSShUser.TabIndex = 4;
+            this.TxtSShUser.Text = "root";
+            // 
+            // TxtSShPwd
+            // 
+            this.TxtSShPwd.Location = new System.Drawing.Point(525, 158);
+            this.TxtSShPwd.Name = "TxtSShPwd";
+            this.TxtSShPwd.PasswordChar = '*';
+            this.TxtSShPwd.Size = new System.Drawing.Size(305, 21);
+            this.TxtSShPwd.TabIndex = 4;
+            this.TxtSShPwd.Text = "kissme";
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(53, 134);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(59, 12);
+            this.label16.TabIndex = 3;
+            this.label16.Text = "ServerIP:";
+            // 
+            // TxtSSHIP
+            // 
+            this.TxtSSHIP.Location = new System.Drawing.Point(133, 130);
+            this.TxtSSHIP.Name = "TxtSSHIP";
+            this.TxtSSHIP.Size = new System.Drawing.Size(305, 21);
+            this.TxtSSHIP.TabIndex = 4;
+            this.TxtSSHIP.Text = "10.3.54.11";
+            // 
+            // RBRemote
+            // 
+            this.RBRemote.AutoSize = true;
+            this.RBRemote.Checked = true;
+            this.RBRemote.Location = new System.Drawing.Point(461, 132);
+            this.RBRemote.Name = "RBRemote";
+            this.RBRemote.Size = new System.Drawing.Size(59, 16);
+            this.RBRemote.TabIndex = 26;
+            this.RBRemote.TabStop = true;
+            this.RBRemote.Text = "Remote";
+            this.RBRemote.UseVisualStyleBackColor = true;
+            // 
+            // RbLocal
+            // 
+            this.RbLocal.AutoSize = true;
+            this.RbLocal.Location = new System.Drawing.Point(526, 132);
+            this.RbLocal.Name = "RbLocal";
+            this.RbLocal.Size = new System.Drawing.Size(53, 16);
+            this.RbLocal.TabIndex = 27;
+            this.RbLocal.Text = "Local";
+            this.RbLocal.UseVisualStyleBackColor = true;
             // 
             // InstallFrom
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(842, 572);
+            this.ClientSize = new System.Drawing.Size(842, 616);
+            this.Controls.Add(this.RBRemote);
+            this.Controls.Add(this.RbLocal);
             this.Controls.Add(this.CbxRunCmd);
             this.Controls.Add(this.TxtRunCommand);
             this.Controls.Add(this.BtnExeccmd);
@@ -396,10 +480,13 @@
             this.Controls.Add(this.label7);
             this.Controls.Add(this.CbxPlaza);
             this.Controls.Add(this.CbxApp);
+            this.Controls.Add(this.TxtSSHIP);
             this.Controls.Add(this.TxtIP);
             this.Controls.Add(this.TxtInstallPath);
             this.Controls.Add(this.TxtResult);
+            this.Controls.Add(this.TxtSShPwd);
             this.Controls.Add(this.TxtSvnPwd);
+            this.Controls.Add(this.TxtSShUser);
             this.Controls.Add(this.TxtSvnName);
             this.Controls.Add(this.TxtNet);
             this.Controls.Add(this.label13);
@@ -407,9 +494,12 @@
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
+            this.Controls.Add(this.label16);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label5);
+            this.Controls.Add(this.label15);
             this.Controls.Add(this.label12);
+            this.Controls.Add(this.label14);
             this.Controls.Add(this.label11);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.BtnClose);
@@ -463,5 +553,13 @@
         private System.Windows.Forms.Button BtnExeccmd;
         private System.Windows.Forms.ComboBox CbxRunCmd;
         private System.Windows.Forms.TextBox TxtRunCommand;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.TextBox TxtSShUser;
+        private System.Windows.Forms.TextBox TxtSShPwd;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.TextBox TxtSSHIP;
+        private System.Windows.Forms.RadioButton RBRemote;
+        private System.Windows.Forms.RadioButton RbLocal;
     }
 }

@@ -89,7 +89,7 @@
             this.TxtIP.Name = "TxtIP";
             this.TxtIP.Size = new System.Drawing.Size(128, 21);
             this.TxtIP.TabIndex = 1;
-            this.TxtIP.Text = "10.3.55.";
+            this.TxtIP.Text = "192.168.1.";
             // 
             // label2
             // 
@@ -124,7 +124,7 @@
             this.TxtPwd.PasswordChar = '*';
             this.TxtPwd.Size = new System.Drawing.Size(701, 21);
             this.TxtPwd.TabIndex = 1;
-            this.TxtPwd.Text = "kissme";
+            this.TxtPwd.Text = "future";
             // 
             // cmd
             // 
@@ -352,7 +352,7 @@
             this.TxtIP4.Name = "TxtIP4";
             this.TxtIP4.Size = new System.Drawing.Size(101, 21);
             this.TxtIP4.TabIndex = 1;
-            this.TxtIP4.Text = "51";
+            this.TxtIP4.Text = "71";
             // 
             // PbExec
             // 

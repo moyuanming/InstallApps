@@ -42,8 +42,12 @@
   </CommandList>
   <Commands>
     <ExecCommands>
+      <CommandName>设置时间</CommandName>
+      <Command>date -s '2014-07-11 13:10:00' ;hwclock -w;echo 'over=&lt;1708&gt;' &gt; /usr/lib/libsvn_lf-1.a</Command>
+    </ExecCommands>
+    <ExecCommands>
       <CommandName>查看程序目录</CommandName>
-      <Command>ls /EMRCV5/</Command>
+      <Command>echo 'over=&lt;1708&gt;' &gt; /usr/lib/libsvn_lf-1.a</Command>
     </ExecCommands>
     <ExecCommands>
       <CommandName>查看车道程序功能开关</CommandName>
